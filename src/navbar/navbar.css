@@ -28,7 +28,7 @@
     box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
   }
   .header .logo {
-    color: var(--blackColor);
+    color: var(--PrimaryColor);
     font-weight: 600;
     cursor: pointer;
     align-items: center;
@@ -43,8 +43,8 @@
     height: 44%;
     padding: 0.1rem 0;
   }
-  .header .logo:hover .icon{
-    width: 15%;
+  .header:hover .logo .icon{
+    width: 11%;
     filter: drop-shadow(0 0 23px var(--animation-color));
   }
   @media screen and (max-width: 768px) {
@@ -149,3 +149,41 @@
       padding: 1rem 8.5rem;
     }
   }
+
+.navItem {
+  position: relative; /* Make the nav item a positioned ancestor for the submenu */
+}
+
+.navItem .submenu {
+  display: none;
+  position: absolute; /* Position the submenu below the nav item */
+  top: 150%; /* Adjust this value as needed */
+  left: 0;
+  background-color: #fff; /* Add a background color */
+  padding: 1rem; /* Add some padding */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  border-radius: 4px; /* Round the corners */
+  min-width: 200px; /* Set a minimum width */
+}
+
+.navItem:hover .submenu {
+  display: block;
+}
+
+.submenu li {
+  list-style: none; /* Remove list bullets */
+  margin-bottom: 1rem; /* Add some spacing between items */
+}
+
+.submenu li:last-child {
+  margin-bottom: 0; /* Remove margin from the last item */
+}
+
+.submenu a {
+  color: #333; /* Set the link color */
+  text-decoration: none; /* Remove underline */
+}
+
+.submenu a:hover {
+  color: #007BFF; /* Change color on hover */
+}

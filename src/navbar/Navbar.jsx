@@ -4,12 +4,12 @@ import { FaBusAlt } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { TbGridDots } from 'react-icons/tb'
 import { Link } from "react-router-dom";
+import jyskImage from '../Assets/Jysk.png'
 //import isAuthenticated from "../../Components/Login/Login";
 
-
-const Navbar = () => {
-    const [cab, setCab] = useState("");
-    const [active, setActive] = useState('navBar')
+function Navbar() {
+    const [isOpen, setIsOpen] = useState(false);
+     
     //Functions show Nav
     const showNav = () => {
         setActive('navBar activeNavbar')
@@ -34,16 +34,23 @@ const Navbar = () => {
 
                 <div className="logoDiv">
                     <a href="/" className="logo flex">
-                        <h1><FaBusAlt className="icon"/>  LvivTrans.</h1>
+                        <h1><img src={jyskImage} className="icon"/>JYSK</h1>
                     </a>
                 </div>
                 
-                <div className={active}>
+                <div className={isOpen ? 'navBar activeNavbar' : 'navBar'}>
                     <ul className="navLists flex">
 
-                        <li className="navItem">
-                            <Link to="/" className="navLink">Home</Link>
-                        </li>
+                    <li className="navItem">
+                        <Link to="/" className="navLink" onClick={() => setIsOpen(!isOpen)}>Catalog</Link>
+                        {isOpen && (
+                        <ul className="submenu">
+                            <li className="navLink"><Link to="/category1">Category 1</Link></li>
+                            <li className="navLink"><Link to="/category2">Category 2</Link></li>
+                            <li className="navLink"><Link to="/category3">Category 3</Link></li>
+                        </ul>
+                        )}
+                    </li>
 
                         <li className="navItem">
                             <Link to="https://lvivtrans-back.azurewebsites.net/swagger-ui/index.html#/" target="_blank" className="navLink">Swagger UI</Link>
