@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import "../../public/img/chair1.jpg"
 
 export class Item extends Component {
   render() {
+    const imgSrc = require("../../public/img/" + this.props.item.img);
     return (
       <div className='item'>
-        <img src={"../../public/img/chair1.jpg"} />
+        <img src={imgSrc.default} />
         <h2>{this.props.item.title}</h2>
         <p>{this.props.item.desc}</p>
         <b>{this.props.item.price}$</b>
