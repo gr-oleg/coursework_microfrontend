@@ -10,53 +10,53 @@ class App extends React.Component {
       sofas: [
         {
           id: 31,
-          name: "Chair 1",
+          name: "Sofa 1",
           img: 'sofa1.jpg',
-          desc: 'This is a chair',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
           price: '49.99'
         },
         {
           id: 32,
-          name: "Chair 2",
+          name: "Sofa 2",
           img: 'sofa2.webp',
-          desc: 'This is a chair',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
           price: '32.00'
         },
         {
           id: 33,
-          name: "Chair 3",
+          name: "Sofa 3",
           img: 'sofa3.jpg',
-          desc: 'This is a chair',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
           price: '69.99'
         },
         {
             id: 34,
-            name: "Chair 4",
+            name: "Sofa 4",
             img: 'sofa4.jpg',
-            desc: 'This is a chair',
+            desc: 'If you are looking for furniture, we recommend that you buy this.',
             price: '49.99'
         },
         {
             id: 35,
-            name: "Chair 5",
+            name: "Sofa 5",
             img: 'sofa5.webp',
-            desc: 'This is a chair',
+            desc: 'If you are looking for furniture, we recommend that you buy this.',
+            price: '49.99'
+        },
+        {
+            id: 36,
+            name: "Sofa 6",
+            img: 'sofa6.png',
+            desc: 'If you are looking for furniture, we recommend that you buy this.',
             price: '49.99'
         },
         {
             id: 37,
-            name: "Chair 7",
+            name: "Sofa 7",
             img: 'sofa7.jpg',
-            desc: 'This is a chair',
+            desc: 'If you are looking for furniture, we recommend that you buy this.',
             price: '49.99'
-        },
-        {
-            id: 38,
-            name: "Chair 8",
-            img: 'sofa8.jpg',
-            desc: 'This is a chair',
-            price: '49.99'
-        },        
+        },       
       ],
     };
   }

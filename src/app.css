@@ -153,3 +153,47 @@ li:hover::after{
     z-index: 2000;
     box-shadow: 0 2px 5px rgba(2, 15, 29, 0.904);
 }
+
+main {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    z-index: -1;
+    padding: 0 200px;
+    border-radius: 10px 10px 0 0;
+}
+
+main .add-to-cart {
+    position: relative;
+    left: 75%;
+    bottom: 30px;
+    background: var(--gradientColor);
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    color: var(--whiteColor);
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 500ms ease;
+}
+
+main .add-to-cart:hover {
+    background: var(--gradientSecondColor);
+    transform: scale(1.5) translateY(-5px);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content {
+    flex: 1 0 auto;
+    margin-top: 80px;
+  }

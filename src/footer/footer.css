@@ -17,13 +17,13 @@
 }
   
 footer {
+  flex-shrink: 0;
   text-align: center;
-  position: fixed;
-  left: 0;
-  bottom: 0;
+  position: static;
   width: 100%;
   color: var(--textColor);
   font-size: 0.9rem;
   background-color: var(--whiteColorDeam);
   box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
+  z-index: 1000;
 }
