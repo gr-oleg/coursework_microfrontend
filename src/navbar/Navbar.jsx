@@ -8,8 +8,11 @@ import jyskImage from '../Assets/Jysk.png'
 //import isAuthenticated from "../../Components/Login/Login";
 
 function Navbar() {
+    const [items, setItems] = useState(undefined);
+    const [showCart, setShowCart] = useState(false);
+    const [active, setActive] = useState('navBar');
     const [isOpen, setIsOpen] = useState(false);
-     
+    const cart = {}; // You need to define cart
     //Functions show Nav
     const showNav = () => {
         setActive('navBar activeNavbar')
@@ -28,6 +31,26 @@ function Navbar() {
         }
       };*/
 
+      let navItems = document.querySelectorAll('.navItem');
+
+      navItems.forEach((navItem) => {
+        let timeout;
+        navItem.addEventListener('mouseenter', function() {
+          clearTimeout(timeout);
+          this.querySelector('.submenu').style.maxHeight = '500px';
+          this.querySelector('.submenu').style.opacity = '1';
+          this.querySelector('.submenu').style.visibility = 'visible';
+        });
+      
+        navItem.addEventListener('mouseleave', function() {
+            timeout = setTimeout(() => {
+              this.querySelector('.submenu').style.maxHeight = '0';
+              this.querySelector('.submenu').style.opacity = '0';
+              this.querySelector('.submenu').style.visibility = 'hidden';
+            }, 100); // Adjust this value as needed
+          });
+      });
+
     return (
         <section className='navBarSection'>
             <header className="header flex">
@@ -38,19 +61,19 @@ function Navbar() {
                     </a>
                 </div>
                 
-                <div className={isOpen ? 'navBar activeNavbar' : 'navBar'}>
+                <div className={active}>
                     <ul className="navLists flex">
 
                     <li className="navItem">
-                        <Link to="/" className="navLink" onClick={() => setIsOpen(!isOpen)}>Catalog</Link>
-                        {isOpen && (
-                        <ul className="submenu">
-                            <li className="navLink"><Link to="/category1">Category 1</Link></li>
-                            <li className="navLink"><Link to="/category2">Category 2</Link></li>
-                            <li className="navLink"><Link to="/category3">Category 3</Link></li>
-                        </ul>
-                        )}
-                    </li>
+    <Link className="navLink" onClick={(event) => {event.preventDefault(); setShowCart(!showCart);}}>Catalog</Link>
+    {showCart && (
+    <ul className="submenu">
+        <li className="navLink"><Link to="/chairs">Chairs</Link></li>
+        <li className="navLink"><Link to="/tables">Tables</Link></li>
+        <li className="navLink"><Link to="/sofas">Sofas</Link></li>
+    </ul>
+    )}
+</li>
 
                         <li className="navItem">
                             <Link to="https://lvivtrans-back.azurewebsites.net/swagger-ui/index.html#/" target="_blank" className="navLink">Swagger UI</Link>
@@ -81,5 +104,6 @@ function Navbar() {
         </section>
     )
 }
+
 
 export default Navbar

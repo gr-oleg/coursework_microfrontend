@@ -7,7 +7,7 @@ const reactLifecycles = singleSpaReact({
   React,
   ReactDOM,
   rootComponent: App,
-  domElementGetter: () => document.getElementById('react'),
+  domElementGetter: () => document.getElementById('tables'),
   suppressComponentDidCatchWarning: true,
 })
 

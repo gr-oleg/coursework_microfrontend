@@ -155,19 +155,36 @@
 }
 
 .navItem .submenu {
-  display: none;
-  position: absolute; /* Position the submenu below the nav item */
-  top: 150%; /* Adjust this value as needed */
+  position: absolute;
+  top: 110%;
   left: 0;
-  background-color: #fff; /* Add a background color */
-  padding: 1rem; /* Add some padding */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  border-radius: 4px; /* Round the corners */
-  min-width: 200px; /* Set a minimum width */
+  background-color: var(--whiteColorDeam);
+  box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
+  padding: 1rem;
+  box-shadow: 1 20px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .navItem:hover .submenu {
-  display: block;
+  visibility: visible;
+  max-height: 500px;
+  opacity: 1;
+  animation: slideDown 0.6s forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: 500px;
+  }
 }
 
 .submenu li {

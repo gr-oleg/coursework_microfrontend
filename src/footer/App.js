@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Navbar from './Navbar.jsx';
+import Footer from './Footer.jsx';
 import '../app.css'
 
 
 const App = () => {
   return (
     <Router>
-      <Navbar />
+      <Footer />
     </Router>
   );
 };
