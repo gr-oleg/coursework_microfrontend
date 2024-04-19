@@ -155,25 +155,25 @@ li:hover::after{
 }
 
 main {
-    margin-top: 20px;
+    margin-top: 22px;
     display: flex;
     width: 100%;
     flex-wrap: wrap;
     justify-content: space-between;
     z-index: -1;
-    padding: 0 200px;
+    padding: 0 180px;
     border-radius: 10px 10px 0 0;
 }
 
 main .add-to-cart {
-    position: relative;
-    left: 75%;
+    position: absolute;
+    right: 30px;
     bottom: 30px;
     background: var(--gradientColor);
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     text-align: center;
-    line-height: 35px;
+    line-height: 50px;
     color: var(--whiteColor);
     border-radius: 50%;
     cursor: pointer;
@@ -197,3 +197,12 @@ html, body {
     flex: 1 0 auto;
     margin-top: 80px;
   }
+
+  .bigboard {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    height: auto;
+    border-radius: 10px 10px 10px 10px;
+}

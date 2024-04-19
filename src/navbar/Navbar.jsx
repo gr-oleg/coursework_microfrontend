@@ -68,9 +68,9 @@ function Navbar() {
     <Link className="navLink" onClick={(event) => {event.preventDefault(); setShowCart(!showCart);}}>Catalog</Link>
     {showCart && (
     <ul className="submenu">
-        <li className="navLink"><Link to="/chairs">Chairs</Link></li>
-        <li className="navLink"><Link to="/tables">Tables</Link></li>
-        <li className="navLink"><Link to="/sofas">Sofas</Link></li>
+        <li className="navLink"><Link to="/men">Men</Link></li>
+        <li className="navLink"><Link to="/women">Women</Link></li>
+        <li className="navLink"><Link to="/kids">Kids</Link></li>
     </ul>
     )}
 </li>

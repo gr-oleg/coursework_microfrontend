@@ -8,7 +8,6 @@ export class Item extends Component {
       <div className='item'>
         <img src={imgSrc.default} />
         <h2>{this.props.item.name}</h2>
-        <p>{this.props.item.desc}</p>
         <b>{this.props.item.price}$</b>
         <div className='add-to-cart'>+</div>
       </div>

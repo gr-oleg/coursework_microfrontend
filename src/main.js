@@ -17,19 +17,19 @@ registerApplication(
 )
 
 registerApplication(
-  'chairs',
-  () => import('./goods/chairs/chairs.app.js'),
-  () => location.pathname.startsWith('/chairs')
+  'men',
+  () => import('./goods/men/men.app.js'),
+  () => location.pathname.startsWith('/men')
 )
 registerApplication(
-  'tables',
-  () => import('./goods/tables/tables.app.js'),
-  () => location.pathname.startsWith('/tables')
+  'kids',
+  () => import('./goods/kids/kids.app.js'),
+  () => location.pathname.startsWith('/kids')
 )
 registerApplication(
-  'sofas',
-  () => import('./goods/sofas/sofas.app.js'),
-  () => location.pathname.startsWith('/sofas')
+  'women',
+  () => import('./goods/women/women.app.js'),
+  () => location.pathname.startsWith('/women')
 )
 
 registerApplication(
