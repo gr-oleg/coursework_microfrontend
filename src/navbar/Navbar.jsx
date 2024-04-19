@@ -4,7 +4,7 @@ import { FaBusAlt } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { TbGridDots } from 'react-icons/tb'
 import { Link } from "react-router-dom";
-import jyskImage from '../Assets/Jysk.png'
+import NBImage from '../Assets/New-Balance-Emblem.png'
 //import isAuthenticated from "../../Components/Login/Login";
 
 function Navbar() {
@@ -57,7 +57,7 @@ function Navbar() {
 
                 <div className="logoDiv">
                     <a href="/" className="logo flex">
-                        <h1><img src={jyskImage} className="icon"/>JYSK</h1>
+                        <h1><img src={NBImage} className="icon"/>New-Balance</h1>
                     </a>
                 </div>
                 

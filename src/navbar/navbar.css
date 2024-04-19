@@ -5,6 +5,8 @@
     hsl(199, 100%, 33%));
     --gradientColor2: linear-gradient(to right, hsl(39, 77%, 60%),
     hsl(34, 98%, 43%));
+    --gradientColor3: linear-gradient(to right, hsl(199, 100%, 33%),
+    hsl(187, 85%, 43%));
     --orangeColor: hsl(34, 98%, 43%);
     --whiteColor: hsl(0, 0%, 100%);
     --blackColor: hsl(201, 33%, 16%);
@@ -44,7 +46,7 @@
     padding: 0.1rem 0;
   }
   .header:hover .logo .icon{
-    width: 11%;
+    width: 8%;
     filter: drop-shadow(0 0 23px var(--animation-color));
   }
   @media screen and (max-width: 768px) {

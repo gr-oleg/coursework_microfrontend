@@ -199,6 +199,7 @@ html, body {
   }
 
   .bigboard {
+    margin-top: 12px;
     display: block;
     margin-left: auto;
     margin-right: auto;

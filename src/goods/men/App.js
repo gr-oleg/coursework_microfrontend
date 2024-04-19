@@ -107,7 +107,102 @@ class App extends React.Component {
             category: 'shoes',
             price: '112.00'
         },
-        
+        {
+          id: 13,
+          name: "Windproof jacket NB Performance",
+          img: 'men_clothes1.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'clothes',
+          price: '119.00'
+        },
+        {
+          id: 14,
+          name: "Windproof jacket Greatest Hits",
+          img: 'men_clothes2.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'clothes',
+          price: '135.00'
+        },
+        {
+          id: 15,
+          name: "Sports jacket Greatest Hits",
+          img: 'men_clothes3.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'clothes',
+          price: '119.00'
+        },
+        {
+          id: 16,
+          name: "Sports jacket Stacked Logo",
+          img: 'men_clothes4.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'clothes',
+          price: '93.00'
+        },
+        {
+          id: 17,
+          name: "T-shirt Jacquard",
+          img: 'men_clothes5.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'clothes',
+          price: '49.99'
+        },
+        {
+          id: 18,
+          name: "T-shirt NB Athletics Graphics",
+          img: 'men_clothes6.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'clothes',
+          price: '29.99'
+        },
+        {
+          id: 19,
+          name: "T-shirt Shifted",
+          img: 'men_clothes7.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'clothes',
+          price: '29.99'
+        },
+        {
+          id: 20,
+          name: "Shorts NB Prfm",
+          img: 'men_clothes8.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'clothes',
+          price: '39.00'
+        },
+        {
+          id: 21,
+          name: "Sports pants NB Tech Knit",
+          img: 'men_clothes9.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'clothes',
+          price: '119.00'
+        },
+        {
+          id: 22,
+          name: "Panama Cargo Bucket",
+          img: 'men_clothes10.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'accessories',
+          price: '45.00'
+        },
+        {
+          id: 23,
+          name: "Bag Sling Bag",
+          img: 'men_clothes11.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'accessories',
+          price: '21.99'
+        },
+        {
+          id: 24,
+          name: "Socks Essentials Line",
+          img: 'men_clothes12.jpg',
+          desc: 'If you are looking for furniture, we recommend that you buy this.',
+          category: 'accessories',
+          price: '19.99'
+        },      
       ],
     };
   }
