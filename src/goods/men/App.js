@@ -210,7 +210,6 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <Router>
-          <img src={Bigboard3} alt="description_of_the_image" className='bigboard' />
           <Men men={this.state.men}/>
         </Router>
       </div>

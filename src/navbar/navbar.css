@@ -39,7 +39,7 @@
 
   @media screen and (max-width: 768px) {
     .header .navBar {
-      position: absolute;
+      position: relative;
       background: var(--whiteColorDeam);
       height: -moz-max-content;
       height: max-content;
@@ -195,3 +195,24 @@
   color: #007BFF; /* Change color on hover */
 }
 
+.shop-cart-button {
+  float: right;
+  cursor: pointer;
+  transition: color, transform 0.5s ease;
+}
+
+.shop-cart-button:hover,
+.shop-cart-button.active {
+  transform: scale(1.1);
+}
+
+.shop-cart {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: 300px;
+  min-height: 100px;
+  background: var(--whiteColorDeam);
+  --webkit-box-shadow: 4px 5px 15px -7px #606060;
+  box-shadow: 4px 5px 15px -7px #606060;
+}

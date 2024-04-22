@@ -66,7 +66,6 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <Router>
-          <img src={Bigboard2} alt="description_of_the_image" className='bigboard' />
           <Kids kids={this.state.kids}/>
         </Router>
       </div>
