@@ -30,25 +30,13 @@
     box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
   }
   .header .logo {
-    color: var(--PrimaryColor);
+    width: 50px;
     font-weight: 600;
     cursor: pointer;
     align-items: center;
     justify-content: center;
   }
-  .header .logo .icon {
-    font-size: 25px;
-    color: var(--PrimaryColor);
-    transform: translateY(5px);
-    width: 0%;
-    transition: 0.7s ease-out;
-    height: 44%;
-    padding: 0.1rem 0;
-  }
-  .header:hover .logo .icon{
-    width: 8%;
-    filter: drop-shadow(0 0 23px var(--animation-color));
-  }
+
   @media screen and (max-width: 768px) {
     .header .navBar {
       position: absolute;
@@ -206,3 +194,4 @@
 .submenu a:hover {
   color: #007BFF; /* Change color on hover */
 }
+

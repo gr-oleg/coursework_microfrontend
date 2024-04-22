@@ -57,7 +57,7 @@ function Navbar() {
 
                 <div className="logoDiv">
                     <a href="/" className="logo flex">
-                        <h1><img src={NBImage} className="icon"/>New-Balance</h1>
+                        <img src={NBImage}/>
                     </a>
                 </div>
                 
@@ -65,7 +65,14 @@ function Navbar() {
                     <ul className="navLists flex">
 
                     <li className="navItem">
-    <Link className="navLink" onClick={(event) => {event.preventDefault(); setShowCart(!showCart);}}>Catalog</Link>
+                            <Link to="/" className="navLink">Home</Link>
+                        </li>
+
+                        <li className="navItem"
+    onMouseEnter={() => setShowCart(true)}
+    onMouseLeave={() => setShowCart(false)}
+>
+    <Link className="navLink">Catalog</Link>
     {showCart && (
     <ul className="submenu">
         <li className="navLink"><Link to="/men">Men</Link></li>
@@ -74,14 +81,6 @@ function Navbar() {
     </ul>
     )}
 </li>
-
-                        <li className="navItem">
-                            <Link to="https://lvivtrans-back.azurewebsites.net/swagger-ui/index.html#/" target="_blank" className="navLink">Swagger UI</Link>
-                        </li>
-
-                        <li className="navItem">
-                            <Link to="https://martian-rocket-872062.postman.co/workspace/My-Workspace~3b4ced84-7916-48f5-8c8b-d237abf64f4c/collection/28092903-3b08e2d2-bad8-4bc0-a565-df13a866f793?action=share&creator=28093284" target="_blank" className="navLink">Postman</Link>
-                        </li>
 
                         <li className="navItem">
                             <Link to="/" className="navLink">Contact</Link>
