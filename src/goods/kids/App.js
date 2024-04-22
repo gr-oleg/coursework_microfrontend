@@ -10,6 +10,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      orders: [     
+      ],
       kids: [
         {
           id: 1,
@@ -60,16 +62,22 @@ class App extends React.Component {
             price: '39.99'
         },
       ],
-    };
+    }
+    this.addToOrder = this.addToOrder.bind(this);
   }
   render() {
     return (
       <div className="wrapper">
         <Router>
-          <Kids kids={this.state.kids}/>
+          <Kids kids={this.state.kids} onAdd={this.addToOrder} />
         </Router>
       </div>
     );
+  }
+  addToOrder(kids) {
+    this.setState({orders: [...this.state.orders, kids]}, () => {
+      console.log(this.state.orders)
+    })
   }
 }
 

@@ -2,14 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import '../../app.css'
 import Men from './men.jsx';
-import Bigboard1 from '../../../public/img/bigboard1.webp';
-import Bigboard2 from '../../../public/img/bigboard2.webp';
-import Bigboard3 from '../../../public/img/bigboard3.webp';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      orders: [     
+      ],
       men: [
         {
           id: 1,
@@ -204,16 +203,22 @@ class App extends React.Component {
           price: '19.99'
         },      
       ],
-    };
+    }
+    this.addToOrder = this.addToOrder.bind(this);
   }
   render() {
     return (
       <div className="wrapper">
         <Router>
-          <Men men={this.state.men}/>
+          <Men men={this.state.men} onAdd={this.addToOrder} />
         </Router>
       </div>
     );
+  }
+  addToOrder(men) {
+    this.setState({orders: [...this.state.orders, men]}, () => {
+      console.log(this.state.orders)
+    })
   }
 }
 

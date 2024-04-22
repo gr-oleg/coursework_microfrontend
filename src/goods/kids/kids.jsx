@@ -6,7 +6,7 @@ export class Kids extends Component {
     return (
       <main>
         {this.props.kids.map(el => (
-            <Item item={el} key={el.id} />
+            <Item item={el} key={el.id} onAdd={this.props.onAdd} />
         ))}
       </main>
     )
