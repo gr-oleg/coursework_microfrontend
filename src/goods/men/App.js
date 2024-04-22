@@ -215,8 +215,8 @@ class App extends React.Component {
       </div>
     );
   }
-  addToOrder(men) {
-    this.setState({orders: [...this.state.orders, men]}, () => {
+  addToOrder(item) {
+    this.setState({orders: [...this.state.orders, item]}, () => {
       console.log(this.state.orders)
     })
   }
