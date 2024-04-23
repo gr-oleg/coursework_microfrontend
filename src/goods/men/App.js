@@ -217,7 +217,7 @@ class App extends React.Component {
   }
   addToOrder(item) {
     this.setState({orders: [...this.state.orders, item]}, () => {
-      console.log(this.state.orders)
+      localStorage.setItem('orders', JSON.stringify(this.state.orders));
     })
   }
 }

@@ -1,4 +1,4 @@
-.item {
+.items {
     width: 30%;
     margin-bottom: 50px;
     background: var(--whiteColor);
@@ -9,18 +9,18 @@
     box-shadow: 4px 5px 15px -7px #8f8f8f;
 }
 
-.item img {
+.items img {
     width: 100%;
     border-radius: 10px 10px 0 0;
     transition: transform 500ms ease;
 }
 
-.item img:hover {
+.items img:hover {
     transform: scale(1.1);
     border-radius: 10px 10px 0 0;
 }
 
-h2, main p, main b {
+main h2, main p, main b {
     margin: 10px 20px;
     color: var(--blackColor);
 }

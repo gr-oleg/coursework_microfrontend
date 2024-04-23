@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './navbar.css'
 import { FaBusAlt } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
@@ -6,14 +6,31 @@ import { TbGridDots } from 'react-icons/tb'
 import { Link } from "react-router-dom";
 import NBImage from '../Assets/New-Balance-Emblem.png'
 import { FaShoppingCart } from 'react-icons/fa'
+import Order from '../goods/Order'
 //import isAuthenticated from "../../Components/Login/Login";
 
 function Navbar() {
+    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('orders')) || []);
     const [items, setItems] = useState(undefined);
     const [showCart, setShowCart] = useState(false);
     const [active, setActive] = useState('navBar');
     const [isOpen, setIsOpen] = useState(false);
-    const cart = {}; // You need to define cart
+
+
+      useEffect(() => {
+        const handleAddToCart = (event) => {
+          const newCart = [...cart, event.detail];
+          setCart(newCart);
+          localStorage.setItem('orders', JSON.stringify(newCart));
+        };
+      
+        window.addEventListener('addToCart', handleAddToCart);
+
+        return () => {
+            window.removeEventListener('addToCart', handleAddToCart);
+          };
+    }, [cart]);
+
     //Functions show Nav
     const showNav = () => {
         setActive('navBar activeNavbar')
@@ -74,6 +91,8 @@ function Navbar() {
                             <Link to="/login" className="navLink">Login</Link>
                         </li>
 
+
+
                         <li1 onClick={() => setCartOpen(cartOpen =!cartOpen)} 
                         className={`shop-cart-button ${cartOpen && 'active'}`}>  
                         <Link className="btn"><FaShoppingCart className="btnn"/></Link>
@@ -81,8 +100,10 @@ function Navbar() {
 
                         {cartOpen && (
                             <div className="shop-cart">
+                                {JSON.parse(localStorage.getItem('orders')).map((item, index) => (
+                                 <Order key={index} item={item} /> // Використовуйте компонент Order для відображення кожного елемента замовлення
+                                ))}
                             </div>
-                        
                         )}
                     </ul>
 
