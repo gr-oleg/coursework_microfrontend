@@ -241,3 +241,10 @@
   color: #797979;
   font-weight: 600;
 }
+
+.navLists .shop-cart .empty h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--greyText);
+}

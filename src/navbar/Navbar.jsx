@@ -17,19 +17,43 @@ function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
 
-      useEffect(() => {
+    useEffect(() => {
         const handleAddToCart = (event) => {
-          const newCart = [...cart, event.detail];
-          setCart(newCart);
-          localStorage.setItem('orders', JSON.stringify(newCart));
+          const item = event.detail;
+          const isItemInCart = cart.some(cartItem => cartItem.id === item.id);
+      
+          if (!isItemInCart) {
+            const newCart = [...cart, item];
+            setCart(newCart);
+            localStorage.setItem('orders', JSON.stringify(newCart));
+            setCartOpen(true); // Open the cart
+          }
         };
       
         window.addEventListener('addToCart', handleAddToCart);
-
+      
         return () => {
-            window.removeEventListener('addToCart', handleAddToCart);
-          };
-    }, [cart]);
+          window.removeEventListener('addToCart', handleAddToCart);
+        };
+      }, [cart]);
+
+    const showOrders = () => {
+        return (
+            <div>
+            {JSON.parse(localStorage.getItem('orders')).map((item, index) => (
+            <Order key={index} item={item} />
+            ))}
+            </div>
+        )
+    }
+
+    const showNothing = () => {
+        return (
+            <div className="empty">
+                <h2>Your cart is empty</h2>
+            </div>
+        )
+    }
 
     //Functions show Nav
     const showNav = () => {
@@ -100,9 +124,7 @@ function Navbar() {
 
                         {cartOpen && (
                             <div className="shop-cart">
-                                {JSON.parse(localStorage.getItem('orders')).map((item, index) => (
-                                 <Order key={index} item={item} /> // Використовуйте компонент Order для відображення кожного елемента замовлення
-                                ))}
+                                {cart.length > 0 ? showOrders() : showNothing()}
                             </div>
                         )}
                     </ul>

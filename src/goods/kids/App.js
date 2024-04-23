@@ -14,7 +14,7 @@ class App extends React.Component {
       ],
       kids: [
         {
-          id: 1,
+          id: 201,
           name: "New Balance 530",
           img: 'kids_shoes1.jpg',
           desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -22,7 +22,7 @@ class App extends React.Component {
           price: '59.99'
         },
         {
-          id: 2,
+          id: 202,
           name: "New Balance 530",
           img: 'kids_shoes2.jpg',
           desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -30,7 +30,7 @@ class App extends React.Component {
           price: '59.99'
         },
         {
-          id: 3,
+          id: 203,
           name: "New Balance 574",
           img: 'kids_shoes3.jpg',
           desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -38,7 +38,7 @@ class App extends React.Component {
           price: '45.99'
         },
         {
-            id: 4,
+            id: 204,
             name: "New Balance 574",
             img: 'kids_shoes4.jpg',
             desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -46,7 +46,7 @@ class App extends React.Component {
             price: '45.99'
         },
         {
-            id: 5,
+            id: 205,
             name: "New Balance 990",
             img: 'kids_shoes5.jpg',
             desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -54,7 +54,7 @@ class App extends React.Component {
             price: '49.99'
         },
         {
-            id: 6,
+            id: 206,
             name: "New Balance SYA809R3",
             img: 'kids_shoes6.jpg',
             desc: 'If you are looking for furniture, we recommend that you buy this.',

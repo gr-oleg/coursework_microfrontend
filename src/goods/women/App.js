@@ -11,7 +11,7 @@ class App extends React.Component {
       ],
       women: [
         {
-          id: 1,
+          id: 101,
           name: "Fuel Cell Venym",
           img: 'women_shoes1.jpg',
           desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -19,7 +19,7 @@ class App extends React.Component {
           price: '129.99'
         },
         {
-          id: 2,
+          id: 102,
           name: "Fresh Foam 680",
           img: 'women_shoes2.jpg',
           desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -27,7 +27,7 @@ class App extends React.Component {
           price: '99.99'
         },
         {
-          id: 3,
+          id: 103,
           name: "Rebel v4",
           img: 'women_shoes3.jpg',
           desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -35,7 +35,7 @@ class App extends React.Component {
           price: '150.00'
         },
         {
-            id: 4,
+            id: 104,
             name: "Beaya",
             img: 'women_shoes4.jpg',
             desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -43,7 +43,7 @@ class App extends React.Component {
             price: '85.99'
         },
         {
-            id: 5,
+            id: 105,
             name: "New Balance 9060",
             img: 'women_shoes5.jpg',
             desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -51,7 +51,7 @@ class App extends React.Component {
             price: '189.99'
         },
         {
-            id: 6,
+            id: 106,
             name: "New Balance 530",
             img: 'women_shoes6.jpg',
             desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -59,7 +59,7 @@ class App extends React.Component {
             price: '119.99'
         },
         {
-            id: 7,
+            id: 107,
             name: "New Balance 550",
             img: 'women_shoes7.jpg',
             desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -67,7 +67,7 @@ class App extends React.Component {
             price: '138.99'
         },    
         {
-          id: 8,
+          id: 108,
           name: "New Balance CT302",
           img: 'women_shoes8.jpg',
           desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -75,7 +75,7 @@ class App extends React.Component {
           price: '115.99'
       },
       {
-        id: 9,
+        id: 109,
         name: "New Balance 997",
         img: 'women_shoes9.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -83,7 +83,7 @@ class App extends React.Component {
         price: '119.50'
       }, 
       { 
-        id: 10,
+        id: 110,
         name: "Jacket Greatest Hits",
         img: 'women_clothes1.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -91,7 +91,7 @@ class App extends React.Component {
         price: '159.00'
       },   
       { 
-        id: 11,
+        id: 111,
         name: "Jacket Linear Heritage",
         img: 'women_clothes2.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -99,7 +99,7 @@ class App extends React.Component {
         price: '109.00'
       }, 
       { 
-        id: 12,
+        id: 112,
         name: "Sports jacket Small Logo",
         img: 'women_clothes3.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -107,7 +107,7 @@ class App extends React.Component {
         price: '79.99'
       },  
       { 
-        id: 13,
+        id: 113,
         name: "Sports jacket NB Greatest Hit",
         img: 'women_clothes4.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -115,7 +115,7 @@ class App extends React.Component {
         price: '100.00'
       },  
       { 
-        id: 14,
+        id: 114,
         name: "Sweater Small Logo",
         img: 'women_clothes5.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -123,7 +123,7 @@ class App extends React.Component {
         price: '59.99'
       },  
       { 
-        id: 15,
+        id: 115,
         name: "Sports pants Shifted",
         img: 'women_clothes6.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -131,7 +131,7 @@ class App extends React.Component {
         price: '69.00'
       },  
       { 
-        id: 16,
+        id: 116,
         name: "Sports pants NB Athletics",
         img: 'women_clothes7.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -139,7 +139,7 @@ class App extends React.Component {
         price: '100.00'
       },  
       { 
-        id: 17,
+        id: 117,
         name: "Shorts NB Small Logo",
         img: 'women_clothes8.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -147,7 +147,7 @@ class App extends React.Component {
         price: '50.00'
       },  
       { 
-        id: 18,
+        id: 118,
         name: "Shorts NB Athletics",
         img: 'women_clothes9.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -155,7 +155,7 @@ class App extends React.Component {
         price: '72.00'
       },  
       { 
-        id: 19,
+        id: 119,
         name: "Bag Classic Canvas",
         img: 'women_clothes10.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -163,7 +163,7 @@ class App extends React.Component {
         price: '39.99'
       },  
       { 
-        id: 20,
+        id: 120,
         name: "Bag Opp Core Shoulder",
         img: 'women_clothes11.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
@@ -171,7 +171,7 @@ class App extends React.Component {
         price: '21.99'
       },  
       { 
-        id: 21,
+        id: 121,
         name: "Socks Essentials Line",
         img: 'women_clothes12.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
