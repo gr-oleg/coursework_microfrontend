@@ -209,8 +209,8 @@
 .navLists .shop-cart {
   position: absolute;
   top: 60px;
-  right: 20px;
-  width: 300px;
+  right: 10px;
+  width: 325px;
   background: var(--whiteColor);
   --webkit-box-shadow: 4px 5px 15px -7px #606060;
   box-shadow: 4px 5px 15px -7px #606060;
@@ -247,4 +247,27 @@
   margin-bottom: 20px;
   text-align: center;
   color: var(--greyText);
+}
+
+.navLists .shop-cart .item .delete-icon {
+  float: right;
+  color: #ca5252;
+  position: relative;
+  top: -12px;
+  cursor: pointer;
+  transition: color, transform 0.5s ease;
+}
+
+.navLists .shop-cart .item .delete-icon:hover {
+  color: #d83030;
+  transform: scale(1.5);
+}
+
+.navLists .shop-cart .total{
+  color: var(--textColor);
+  float: left;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }

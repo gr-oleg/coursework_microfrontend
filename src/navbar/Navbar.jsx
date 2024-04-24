@@ -37,15 +37,25 @@ function Navbar() {
         };
       }, [cart]);
 
-    const showOrders = () => {
+    const handleRemoveFromCart = (itemToRemove) => {
+        const newCart = cart.filter(item => item.id !== itemToRemove.id);
+        setCart(newCart);
+        localStorage.setItem('orders', JSON.stringify(newCart));
+      };
+
+      const showOrders = () => {
+        const items = JSON.parse(localStorage.getItem('orders'));
+        const total = items.reduce((sum, item) => sum + Number(item.price), 0);
+      
         return (
-            <div>
-            {JSON.parse(localStorage.getItem('orders')).map((item, index) => (
-            <Order key={index} item={item} />
+          <div>
+            {items.map((item, index) => (
+              <Order key={index} item={item} onRemove={handleRemoveFromCart} />
             ))}
-            </div>
-        )
-    }
+            <p className="total">Total: {total.toFixed(2)}$</p>
+          </div>
+        );
+      };
 
     const showNothing = () => {
         return (
