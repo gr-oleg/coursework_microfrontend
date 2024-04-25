@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import '../../app.css'
 import Women from './women.jsx';
+import Categories from '../Categories.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -186,6 +187,7 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <Router>
+          <Categories />
           <Women women={this.state.women} onAdd={this.addToOrder} />
         </Router>
       </div>

@@ -2,9 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import '../../app.css'
 import Kids from './kids.jsx';
-import Bigboard1 from '../../../public/img/bigboard1.webp';
-import Bigboard2 from '../../../public/img/bigboard2.webp';
-import Bigboard3 from '../../../public/img/bigboard3.webp';
+import Categories from '../Categories.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -69,6 +67,7 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <Router>
+          <Categories />
           <Kids kids={this.state.kids} onAdd={this.addToOrder} />
         </Router>
       </div>
