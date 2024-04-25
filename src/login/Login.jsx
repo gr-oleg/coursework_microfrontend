@@ -229,9 +229,14 @@ const loadUserData = () => {
               <button className="btnl" id="signIn">
                 Sign In
               </button>
-              <div className="row">
+              <div className="row2">
                <span className="spacer"></span>
-
+               <span className="spacer"></span>
+           <span></span>
+            </div>
+            <div className="row2">
+               <span className="spacer"></span>
+                <span className="spacer"></span>
            <span></span>
             </div>
             </div>
