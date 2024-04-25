@@ -10,6 +10,7 @@ class App extends React.Component {
     this.state = {
       orders: [     
       ],
+      currentItems: [],
       kids: [
         {
           id: 201,
@@ -61,18 +62,31 @@ class App extends React.Component {
         },
       ],
     }
+    this.state.currentItems = this.state.kids;
     this.addToOrder = this.addToOrder.bind(this);
+    this.chooseCategory = this.chooseCategory.bind(this);
   }
   render() {
     return (
       <div className="wrapper">
         <Router>
-          <Categories />
-          <Kids kids={this.state.kids} onAdd={this.addToOrder} />
+          <Categories chooseCategory={this.chooseCategory} />
+          <Kids kids={this.state.currentItems} onAdd={this.addToOrder} />
         </Router>
       </div>
     );
   }
+
+  chooseCategory(category) {
+    if(category === 'all'){
+      this.setState({currentItems: this.state.kids});
+      return
+    }
+    this.setState({
+      currentItems: this.state.kids.filter(el => el.category === category)
+    })
+  }
+
   addToOrder(item) {
     this.setState({orders: [...this.state.orders, item]}, () => {
       localStorage.setItem('orders', JSON.stringify(this.state.orders));

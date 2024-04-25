@@ -10,6 +10,7 @@ class App extends React.Component {
     this.state = {
       orders: [     
       ],
+      currentItems: [],
       women: [
         {
           id: 101,
@@ -160,7 +161,7 @@ class App extends React.Component {
         name: "Bag Classic Canvas",
         img: 'women_clothes10.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
-        category: 'clothes',
+        category: 'accessories',
         price: '39.99'
       },  
       { 
@@ -168,7 +169,7 @@ class App extends React.Component {
         name: "Bag Opp Core Shoulder",
         img: 'women_clothes11.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
-        category: 'clothes',
+        category: 'accessories',
         price: '21.99'
       },  
       { 
@@ -176,23 +177,36 @@ class App extends React.Component {
         name: "Socks Essentials Line",
         img: 'women_clothes12.jpg',
         desc: 'If you are looking for furniture, we recommend that you buy this.',
-        category: 'clothes',
+        category: 'accessories',
         price: '19.99'
       },    
       ],
     }
+    this.state.currentItems = this.state.women
     this.addToOrder = this.addToOrder.bind(this);
+    this.chooseCategory = this.chooseCategory.bind(this);
   }
   render() {
     return (
       <div className="wrapper">
         <Router>
-          <Categories />
-          <Women women={this.state.women} onAdd={this.addToOrder} />
+          <Categories chooseCategory={this.chooseCategory} />
+          <Women women={this.state.currentItems} onAdd={this.addToOrder} />
         </Router>
       </div>
     );
   }
+
+  chooseCategory(category) {
+    if(category === 'all'){
+      this.setState({currentItems: this.state.women});
+      return
+    }
+    this.setState({
+      currentItems: this.state.women.filter(el => el.category === category)
+    })
+  }
+
   addToOrder(item) {
     this.setState({orders: [...this.state.orders, item]}, () => {
       localStorage.setItem('orders', JSON.stringify(this.state.orders));
