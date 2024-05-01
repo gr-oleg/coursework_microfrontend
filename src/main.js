@@ -33,6 +33,12 @@ registerApplication(
 )
 
 registerApplication(
+  'home',
+  () => import('./home/home.app.js'),
+  () => location.pathname === '/'
+)
+
+registerApplication(
   'footer',
   () => import('./footer/footer.app.js'),
   () => location.pathname.startsWith('/')
