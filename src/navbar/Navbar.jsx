@@ -118,14 +118,14 @@ function Navbar() {
                           )}
                         </li>
 
-                        <li className="navItem">
+                      {/*  <li className="navItem">
                             <Link to="/" className="navLink">Contact</Link>
                         </li>
+                       */}
                         <li className="navItem">
                             <Link to="/login" className="navLink">Login</Link>
                         </li>
-
-
+      
 
                         <li1 onClick={() => setCartOpen(cartOpen =!cartOpen)} 
                         className={`shop-cart-button ${cartOpen && 'active'}`}>  
