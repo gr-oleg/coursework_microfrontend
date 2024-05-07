@@ -53,6 +53,10 @@ function Navbar() {
               <Order key={index} item={item} onRemove={handleRemoveFromCart} />
             ))}
             <p className="total">Total: {total.toFixed(2)}$</p>
+            <Link to="/login">
+            <button className="checkout-button" 
+            onClick={() => setCartOpen(cartOpen =!cartOpen)}>Checkout</button>
+            </Link>
           </div>
         );
       };
