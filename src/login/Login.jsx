@@ -77,7 +77,7 @@ const loginClick = (e) => {
     alert("Please fill in all fields");
     return;
   }else{
-  const url = `https://back.azurewebsites.net/user/${email}?pass=${pass}`;
+  const url = `https://wback.azurewebsites.net/user/${email}?pass=${pass}`;
   fetch(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
