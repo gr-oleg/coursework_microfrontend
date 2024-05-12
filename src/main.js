@@ -39,6 +39,12 @@ registerApplication(
 )
 
 registerApplication(
+  'profile',
+  () => import('./profile/profile.app.js'),
+  () => location.pathname.startsWith('/profile')
+)
+
+registerApplication(
   'footer',
   () => import('./footer/footer.app.js'),
   () => location.pathname.startsWith('/')

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useHistory } from "react-router-dom";
 
 
 const Login = ({ onLogin }) => {
@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
       return;
     }else{
     console.log(login);
-    fetch("https://lvivtrans-back.azurewebsites.net/user/add", {
+    fetch("http://13.51.198.24/user/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(login),
@@ -77,7 +77,7 @@ const loginClick = (e) => {
     alert("Please fill in all fields");
     return;
   }else{
-  const url = `https://wback.azurewebsites.net/user/${email}?pass=${pass}`;
+  const url = `http://13.51.198.24/user/${email}?pass=${pass}`;
   fetch(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -92,9 +92,12 @@ const loginClick = (e) => {
     .then((data) => {
       if (data && data.email && data.pass === pass) {
         setIsAuthenticated(true);
+        /*
         localStorage.setItem("isAuthenticated", true);
         localStorage.setItem("email", email);
         localStorage.setItem("userData", JSON.stringify({ email, user, id, pass }));
+        */
+        navigate("/profile");
       } else if (data.pass !== pass) {
         alert("Password is incorrect!");
       } else if (data.email !== email) {
@@ -166,7 +169,6 @@ const loadUserData = () => {
   }, []);
 
   return (
-    <div>
     <body className="login">
 
         <div className="container right-panel-active">
@@ -216,7 +218,7 @@ const loadUserData = () => {
       onChange={(e) => setPass(e.target.value)}
     />
     <button type="submit" className="btns">
-      <Link to={{ pathname: "/", state: { email: email } }} className="btnl" onClick={loginClick}>
+      <Link to={isAuthenticated ? "/profile" : "#"} className="btnl" onClick={loginClick}>
         Sign In
       </Link>
     </button>
@@ -259,7 +261,6 @@ const loadUserData = () => {
         </div>
       </div>
     </body>
-    </div>
     
   );
   
