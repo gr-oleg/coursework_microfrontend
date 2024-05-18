@@ -90,6 +90,8 @@ const loginClick = (e) => {
       if (data && data.email && data.pass === pass) {
         setIsAuthenticated(true);
         localStorage.setItem("userId", data.id);
+        localStorage.setItem("userName", data.user);
+        localStorage.setItem("userEmail", data.email);
         window.location.reload();
         /*
         localStorage.setItem("isAuthenticated", true);
