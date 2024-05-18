@@ -3,7 +3,7 @@ import './navbar.css'
 import { FaBusAlt } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { TbGridDots } from 'react-icons/tb'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NBImage from '../Assets/New-Balance-Emblem.png'
 import { FaShoppingCart } from 'react-icons/fa'
 import Order from '../goods/Order'
@@ -15,7 +15,9 @@ function Navbar() {
     const [showCart, setShowCart] = useState(false);
     const [active, setActive] = useState('navBar');
     const [isOpen, setIsOpen] = useState(false);
-
+    const navigate = useNavigate();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isReloaded, setIsReloaded] = useState(false);
 
     useEffect(() => {
         const handleAddToCart = (event) => {
@@ -37,6 +39,13 @@ function Navbar() {
         };
       }, [cart]);
 
+      useEffect(() => {
+        const userId = localStorage.getItem('userId');
+        if (userId) {
+          setIsAuthenticated(true);
+        }
+      }, []);          
+
     const handleRemoveFromCart = (itemToRemove) => {
         const newCart = cart.filter(item => item.id !== itemToRemove.id);
         setCart(newCart);
@@ -53,7 +62,7 @@ function Navbar() {
               <Order key={index} item={item} onRemove={handleRemoveFromCart} />
             ))}
             <p className="total">Total: {total.toFixed(2)}$</p>
-            <Link to="/login">
+            <Link to={isAuthenticated ? "/checkout" : "/profile"}>
             <button className="checkout-button" 
             onClick={() => setCartOpen(cartOpen =!cartOpen)}>Checkout</button>
             </Link>
@@ -67,7 +76,7 @@ function Navbar() {
                 <h2>Your cart is empty</h2>
             </div>
         )
-    }
+    } 
 
     //Functions show Nav
     const showNav = () => {
@@ -79,16 +88,7 @@ function Navbar() {
         setActive('navBar')
     }
 
-    /*const handleCabinet = () => {
-        if (isAuthenticated) {
-          setCab("/cabinet");
-        } else {
-          setCab("/login");
-        }
-      };*/
-
-      let [cartOpen, setCartOpen] = useState(false);
-
+    let [cartOpen, setCartOpen] = useState(false);
 
     return (
         <section className='navBarSection'>
@@ -127,7 +127,9 @@ function Navbar() {
                         </li>
                        */}
                         <li className="navItem">
-                            <Link to="/login" className="navLink">Login</Link>
+                        <Link to={"/profile"} className="navLink">
+                        Profile
+                        </Link>
                         </li>
       
 

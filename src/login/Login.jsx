@@ -10,7 +10,16 @@ const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [id, setId] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState("");
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      setIsAuthenticated(true);
+    }else{
+      setIsAuthenticated(false);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,18 +68,6 @@ const Login = ({ onLogin }) => {
         });
   }};
 
-const handleLogout = () => {
-  localStorage.removeItem("isAuthenticated");
-  localStorage.removeItem("email");
-  localStorage.removeItem("user");
-  localStorage.removeItem("id");
-  localStorage.removeItem("pass");
-  localStorage.removeItem("userData");
-  setIsAuthenticated(false);
-  setEmail("");
-  window.location.reload();
-};
-
 const loginClick = (e) => {
   e.preventDefault();
   if (email.trim() === "" || pass.trim() === "") {
@@ -92,6 +89,8 @@ const loginClick = (e) => {
     .then((data) => {
       if (data && data.email && data.pass === pass) {
         setIsAuthenticated(true);
+        localStorage.setItem("userId", data.id);
+        window.location.reload();
         /*
         localStorage.setItem("isAuthenticated", true);
         localStorage.setItem("email", email);
@@ -218,7 +217,7 @@ const loadUserData = () => {
       onChange={(e) => setPass(e.target.value)}
     />
     <button type="submit" className="btns">
-      <Link to={isAuthenticated ? "/profile" : "#"} className="btnl" onClick={loginClick}>
+      <Link to={"/profile"} className="btnl" onClick={loginClick}>
         Sign In
       </Link>
     </button>

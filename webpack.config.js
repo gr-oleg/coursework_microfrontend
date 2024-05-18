@@ -51,6 +51,7 @@ module.exports = {
   devServer: {
     port: 3000,
     contentBase: path.join(__dirname, 'dist'),
+    historyApiFallback: true,
   },
   plugins: [
     new CleanWebpackPlugin(),

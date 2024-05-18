@@ -7,7 +7,7 @@ const reactLifecycles = singleSpaReact({
   React,
   ReactDOM,
   rootComponent: App,
-  domElementGetter: () => document.getElementById('profile'),
+  domElementGetter: () => document.getElementById('checkout'),
   suppressComponentDidCatchWarning: true,
 })
 

@@ -11,12 +11,6 @@ registerApplication(
 )
 
 registerApplication(
-  'login',
-  () => import('./login/login.app.js'),
-  () => location.pathname.startsWith('/login')
-)
-
-registerApplication(
   'men',
   () => import('./goods/men/men.app.js'),
   () => location.pathname.startsWith('/men')
@@ -40,8 +34,14 @@ registerApplication(
 
 registerApplication(
   'profile',
-  () => import('./profile/profile.app.js'),
+  () => localStorage.getItem('userId') ? import('./profile/profile.app.js') : import('./login/login.app.js'),
   () => location.pathname.startsWith('/profile')
+)
+
+registerApplication(
+  'checkout',
+  () => import('./Checkout/checkout.app.js'),
+  () => location.pathname.startsWith('/checkout')
 )
 
 registerApplication(
