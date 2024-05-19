@@ -9,6 +9,7 @@ export class App extends Component {
     this.state = {
       phoneNumber: "",
       email: localStorage.getItem('userEmail'),
+      id: localStorage.getItem('userId')
     };
   }
 
@@ -44,6 +45,45 @@ export class App extends Component {
                 localStorage.setItem("userPhoneNumber", data.phoneNumber);
             } else {
                 alert(data);
+            }
+          }
+        })
+        .catch((error) => {
+            alert(error.message);
+            console.error("Error:", error);
+        });
+  }};
+
+  deleteClick = (e) => {
+    e.preventDefault();
+    if (window.confirm("Are you sure you want to delete your account?")) {
+      fetch(`http://13.51.198.24/user/${this.state.id}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(login),
+      })
+
+        .then((response) => {
+            if (response.ok) {
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    return response.json();
+                } else {
+                    return response.text();
+                }
+            } else {
+                throw new Error("Error: " + response.status);
+            }
+        })
+        .then((data) => {{
+            if (typeof data === "object") {
+                alert(data.message);
+                localStorage.clear();
+                window.location.reload();
+            } else {
+                alert(data);
+                localStorage.clear();
+                window.location.reload();
             }
           }
         })
@@ -90,7 +130,7 @@ export class App extends Component {
             />
             <button className="submit" onClick={this.handleClick}>&#10003;</button>
           </p>
-          <button className='delete'>Delete account</button>
+          <button className='delete' onClick={this.deleteClick}>Delete account</button>
         </div>
         <div className="bodyexit">
           <button className='exit' onClick={this.clearLocalStorage}>Exit<TbLogout /></button>

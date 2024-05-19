@@ -20,7 +20,7 @@ footer {
   flex-shrink: 0;
   text-align: center;
   position: static;
-  width: 100%;
+  width: 101%;
   color: var(--textColor);
   font-size: 0.9rem;
   background-color: var(--whiteColorDeam);
