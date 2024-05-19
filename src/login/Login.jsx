@@ -92,6 +92,7 @@ const loginClick = (e) => {
         localStorage.setItem("userId", data.id);
         localStorage.setItem("userName", data.user);
         localStorage.setItem("userEmail", data.email);
+        localStorage.setItem("userPhoneNumber", data.phoneNumber);
         window.location.reload();
         /*
         localStorage.setItem("isAuthenticated", true);
