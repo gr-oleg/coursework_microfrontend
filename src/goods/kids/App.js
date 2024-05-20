@@ -8,64 +8,25 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      orders: [     
-      ],
+      orders: [],
       currentItems: [],
-      kids: [
-        {
-          id: 201,
-          name: "New Balance 530",
-          img: 'kids_shoes1.jpg',
-          desc: 'If you are looking for furniture, we recommend that you buy this.',
-          category: 'shoes',
-          price: '59.99'
-        },
-        {
-          id: 202,
-          name: "New Balance 530",
-          img: 'kids_shoes2.jpg',
-          desc: 'If you are looking for furniture, we recommend that you buy this.',
-          category: 'shoes',
-          price: '59.99'
-        },
-        {
-          id: 203,
-          name: "New Balance 574",
-          img: 'kids_shoes3.jpg',
-          desc: 'If you are looking for furniture, we recommend that you buy this.',
-          category: 'shoes',
-          price: '45.99'
-        },
-        {
-            id: 204,
-            name: "New Balance 574",
-            img: 'kids_shoes4.jpg',
-            desc: 'If you are looking for furniture, we recommend that you buy this.',
-            category: 'shoes',
-            price: '45.99'
-        },
-        {
-            id: 205,
-            name: "New Balance 990",
-            img: 'kids_shoes5.jpg',
-            desc: 'If you are looking for furniture, we recommend that you buy this.',
-            category: 'shoes',
-            price: '49.99'
-        },
-        {
-            id: 206,
-            name: "New Balance SYA809R3",
-            img: 'kids_shoes6.jpg',
-            desc: 'If you are looking for furniture, we recommend that you buy this.',
-            category: 'shoes',
-            price: '39.99'
-        },
-      ],
+      kids: []
     }
-    this.state.currentItems = this.state.kids;
+
     this.addToOrder = this.addToOrder.bind(this);
     this.chooseCategory = this.chooseCategory.bind(this);
   }
+
+  componentDidMount() {
+    fetch('http://51.21.3.167/item/getAll')
+      .then(response => response.json())
+      .then(data => {
+        const kidsItems = data.filter(item => item.sex === 'kids');
+        this.setState({ kids: kidsItems, currentItems: kidsItems });
+      })
+      .catch(error => console.error('Error:', error));
+  }
+
   render() {
     return (
       <div className="wrapper">
