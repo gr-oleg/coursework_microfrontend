@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './checkout.css'
 import Order from '../goods/Order'
 import ReactSelect from 'react-select';
+import image from '../Assets/image.png'
+import { IoWalletOutline } from "react-icons/io5";
 
 class App extends Component {
   constructor(props) {
@@ -39,7 +41,8 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      this.setState({ regions: data.data });
+      const filteredRegions = data.data.filter(region => region.Description !== 'АРК');
+      this.setState({ regions: filteredRegions });
       const AD = data.data.Ref; // Access Ref on the first element of the array
       this.fetchCities(AD);
     })
@@ -148,6 +151,7 @@ class App extends Component {
     this.setState({ cart: newCart }, () => {
       localStorage.setItem('orders', JSON.stringify(newCart));
     });
+    window.location.reload();
   };
 
   getTotal = () => {
@@ -156,44 +160,70 @@ class App extends Component {
 
   render() {
     const { regions, cities, area, warehouses, selectedRegion,selectedArea, selectedCity, selectedWarehouse } = this.state;
-    const options = regions.map(region => ({ value: region.Description, label: region.Description }));
+    const options = regions.map(region => ({ value: region.Description, label: region.Description + " область" }));
     const options2 = cities.map(cities => ({ value: cities.Description, label: cities.Description }));
     const options4 = warehouses.map(warehouses => ({ value: warehouses.Description, label: warehouses.Description }));
     return (
       <div className='container'>
         <div className='delivery'>
-        <h2> Доставка:</h2> 
-          Область:
-                <ReactSelect 
+        <h2><img className='NP' src={image} /></h2> 
+
+      <div className="region-select">
+        Region:
+        <ReactSelect 
         value={options.find(option => option.value === selectedRegion)} 
         onChange={this.handleRegionChange} 
         options={options} 
       />
+      </div>
 
-      Місто(село):
-      <ReactSelect 
+      <div className="settlement-select">
+      Settlement:
+       <ReactSelect 
         value={options2.find(option => option.value === selectedCity)} 
         onChange={this.handleCityChange} 
         options={options2} 
         isDisabled={!selectedRegion}
       />
-      Відділення:
-      <ReactSelect 
-  value={options4.find(option => option.value === selectedWarehouse)} 
-  onChange={this.handleWarehouseChange} 
-  options={options4} 
-  isDisabled={!selectedCity}
+      </div>
 
-/>
-      
+      <div className="warehouse-select">
+      Warehouse:
+       <ReactSelect 
+       value={options4.find(option => option.value === selectedWarehouse)} 
+       onChange={this.handleWarehouseChange} 
+       options={options4} 
+       isDisabled={!selectedCity}
+       />
+      </div>
+      Payment:
+      <div className="payment"><input className='radio' type="radio" checked></input>
+      <IoWalletOutline className='icon'/> Payment on delivery</div>
+      <div className='inputRecipient'>
+      Recipient
+        <input
+              type="text"
+              placeholder={(localStorage.getItem('userName') === 'null' || localStorage.getItem('userName') === null) ? "User" : localStorage.getItem('userName')}
+              className="input" 
+        />
+      </div>
+      <div className='inputNumberRecipient'>
+      Recipient's phone number
+        <input
+              type="text"
+              placeholder={(localStorage.getItem('userPhoneNumber') === 'null' || localStorage.getItem('userPhoneNumber') === null) ? "380" : localStorage.getItem('userPhoneNumber')}
+              className="input" 
+        />
+      </div>
         </div>
+
         <div className='check'>
           <div className='shop-cart'>
             {this.state.cart.map((item, index) => (
               <Order key={index} item={item} onRemove={this.handleRemoveFromCart} />
             ))}
             <p className="total">Total: {this.getTotal().toFixed(2)}$</p>
-            <button className="check-button">Checkout</button>
+            <button className="check-button">Confirm the order</button>
           </div>
         </div>
       </div>

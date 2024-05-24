@@ -4,6 +4,9 @@
 }
 
 .check {
+  display: flex; /* Add this */
+  flex-direction: column; /* Add this */
+  justify-content: space-between; /* Add this */
   width: 60%;
   margin: 5px;
   margin-right: 120px;
@@ -13,11 +16,13 @@
   box-shadow: 3px 10px 15px hsl(0deg 0% 0% / 0.31);
   background-color: rgb(255, 255, 255);
   margin-bottom: 12px;
+  height: 100%; /* Add this */
 }
 
 .delivery {
   width: 100%;
   margin: 5px;
+  height: 100%;
   margin-left: 110px;
   padding: 20px;
   align-items: center;
@@ -104,4 +109,58 @@
   .check-button:hover{
     background: var(--gradientColor2);
     transform: scale(1.03);
+  }
+
+  .NP{
+    width: 200px;  /* adjust as needed */
+    height: auto; /* maintain aspect ratio */
+  }
+
+  .region-select {
+    margin-top: 10px; /* adjust as needed */
+  }
+  
+  .settlement-select {
+    margin-top: 10px; /* adjust as needed */
+  }
+
+  .warehouse-select {
+    margin-top: 10px;
+    margin-bottom: 10px; /* adjust as needed */
+  }
+
+  .payment {
+    display: flex; /* add this */
+    align-items: center; /* change this from align-items to justify-content */
+    margin-bottom: 20px; /* adjust as needed */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(240, 240, 240);
+    margin-bottom: 12px;
+  }
+  
+  .payment .icon {
+    margin-right: 5px; /* add this to add some space between the icon and the text */
+    font-size: 25px;
+  }
+
+  .payment .radio:checked {
+    background-color: green;
+    margin-right: 8px;
+    margin-left: 5px; /* add this to add some space between the radio button and the text */
+  }
+
+  .inputRecipient, .inputNumberRecipient {
+    margin: 10px 0; /* Add some vertical margin around the divs */
+  }
+  
+  .inputRecipient input, .inputNumberRecipient input {
+    width: 100%; /* Make the input fields take up the full width of their parent div */
+    padding: 10px; /* Add some padding inside the input fields */
+    border: 1px solid #ccc; /* Add a border around the input fields */
+    border-radius: 4px; /* Round the corners of the input fields */
+  }
+  
+  .inputRecipient input::placeholder, .inputNumberRecipient input::placeholder {
+    color: #888; /* Change the color of the placeholder text */
   }
