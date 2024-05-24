@@ -1,0 +1,107 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.check {
+  width: 60%;
+  margin: 5px;
+  margin-right: 120px;
+  padding: 20px;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 3px 10px 15px hsl(0deg 0% 0% / 0.31);
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 12px;
+}
+
+.delivery {
+  width: 100%;
+  margin: 5px;
+  margin-left: 110px;
+  padding: 20px;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 3px 10px 15px hsl(0deg 0% 0% / 0.31);
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 12px;
+}
+
+.check .shop-cart {
+    width: 100%;
+    background: var(--whiteColor);
+    padding-bottom: 0;
+  }
+  
+  .check .shop-cart .item {
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+  }
+  
+  .check .shop-cart .item img{
+    width: 110px;
+    float: left;
+    margin-right: 20px;
+    margin-top: 3px;
+  }
+  
+  .check .shop-cart .item h2 {
+    font-size: 15px;
+    margin-bottom: 6px;
+    margin-top: 8px;
+  }
+  
+  .check .shop-cart .item b {
+    color: #797979;
+    font-weight: 600;
+  }
+  
+  .check .shop-cart .empty h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--greyText);
+  }
+  
+  .check .shop-cart .item .delete-icon {
+    font-size: 20px;
+    float: right;
+    color: #ca5252;
+    position: relative;
+    top: -15px;
+    cursor: pointer;
+    transition: color, transform 0.5s ease;
+  }
+  
+  .check .shop-cart .item .delete-icon:hover {
+    color: #d83030;
+    transform: scale(1.5);
+  }
+  
+  .check .shop-cart .total{
+    color: var(--textColor);
+    float: left;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .check-button{
+    width: 100%;
+    padding: .4rem ;
+    border-radius: 3rem;
+    font-size: 16px;
+    background: var(--gradientColor);
+    color: var(--whiteColor);
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: color, transform 0.8s ease;
+  }
+  
+  .check-button:hover{
+    background: var(--gradientColor2);
+    transform: scale(1.03);
+  }

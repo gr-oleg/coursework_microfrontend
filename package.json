@@ -39,6 +39,7 @@
     "react-dom": "^17.0.2",
     "react-icons": "^5.1.0",
     "react-router-dom": "^6.22.3",
+    "react-select": "^5.8.0",
     "react-slick": "^0.30.2",
     "single-spa": "^5.9.3",
     "single-spa-react": "^4.1.2",
