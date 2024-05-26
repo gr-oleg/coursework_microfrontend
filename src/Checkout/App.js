@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import './checkout.css'
 import Order from '../goods/Order'
 import ReactSelect from 'react-select';
@@ -17,9 +17,77 @@ class App extends Component {
       selectedRegion: '',
       selectedCity: '',
       selectedArea: '',
-      selectedWarehouse: ''
+      selectedWarehouse: '',
+      recipient: '',
+      phoneNumber: '',
+      idItems: [],
+      totalPrice: '',
     };
   }
+
+
+  checkoutClick = (e) => {
+    e.preventDefault();
+    const { recipient, phoneNumber } = this.state;
+    const address = `${this.state.selectedWarehouse}, ${this.state.selectedCity}, ${this.state.selectedRegion}`;
+    const orders = JSON.parse(localStorage.getItem('orders'));
+    const idItems = orders ? JSON.stringify(orders.map(order => order.id)) : ""; // Convert to string
+    const totalPrice = orders ? orders.reduce((total, order) => total + order.price, 0) : 0;
+    const idUser = Number(localStorage.getItem('userId')); // Convert to number
+    const check = { 
+      recipient, 
+      phoneNumber, 
+      address, 
+      idItems, 
+      totalPrice: totalPrice.toString(), 
+      idUser
+    };
+    if (recipient.trim() === "" || phoneNumber.trim() === "" || address.trim() === "") {
+      alert("Please fill in all fields.");
+      return;
+    }else if (!orders || orders.length === 0) {
+      alert("Your cart is empty. Please add some items before checking out.");
+      return;
+    }else{
+    console.log(check);
+    fetch("http://13.49.159.68/order/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(check),
+    })
+
+        .then((response) => {
+            if (response.ok) {
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    return response.json();
+                } else {
+                    return response.text();
+                }
+            } else if (response.status === 409) {
+                throw new Error("Error 409");
+            } else {
+                throw new Error("Error: " + response.status);
+            }
+        })
+        .then((data) => {{
+            if (typeof data === "object") {
+                alert(data.message);
+                localStorage.removeItem('orders');
+                window.location.href = '/men';
+            } else {
+                alert(data);
+                localStorage.removeItem('orders');
+                window.location.href = '/men';
+
+            }
+          }
+        })
+        .catch((error) => {
+            alert(error.message);
+            console.error("Error:", error);
+        });
+  }};
 
   componentDidMount() {
     this.fetchRegions();
@@ -203,16 +271,26 @@ class App extends Component {
       Recipient
         <input
               type="text"
-              placeholder={(localStorage.getItem('userName') === 'null' || localStorage.getItem('userName') === null) ? "User" : localStorage.getItem('userName')}
+              placeholder={"Full name"}
               className="input" 
+              value={this.state.recipient}
+              onChange={e => this.setState({ recipient: e.target.value })}
         />
       </div>
       <div className='inputNumberRecipient'>
       Recipient's phone number
         <input
               type="text"
-              placeholder={(localStorage.getItem('userPhoneNumber') === 'null' || localStorage.getItem('userPhoneNumber') === null) ? "380" : localStorage.getItem('userPhoneNumber')}
+              placeholder={"+380"}
               className="input" 
+              value={this.state.phoneNumber}
+              onChange={e => this.setState({ phoneNumber: e.target.value })}
+              required 
+              onKeyPress={(event) => {
+                if (!/[0-9+]/.test(event.key)) {
+                  event.preventDefault();
+                }
+              }}
         />
       </div>
         </div>
@@ -223,7 +301,7 @@ class App extends Component {
               <Order key={index} item={item} onRemove={this.handleRemoveFromCart} />
             ))}
             <p className="total">Total: {this.getTotal().toFixed(2)}$</p>
-            <button className="check-button">Confirm the order</button>
+            <button className="check-button" onClick={this.checkoutClick}>Confirm the order</button>
           </div>
         </div>
       </div>

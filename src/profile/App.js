@@ -116,8 +116,9 @@ export class App extends Component {
           <p>
             Phone Number: &nbsp;
             <input 
+              className="item"
               type="tel" 
-              placeholder={(localStorage.getItem('userPhoneNumber') === 'null' || localStorage.getItem('userPhoneNumber') === null) ? "380" : localStorage.getItem('userPhoneNumber')}
+              placeholder={(localStorage.getItem('userPhoneNumber') === 'null' || localStorage.getItem('userPhoneNumber') === null) ? "+380" : localStorage.getItem('userPhoneNumber')}
               value={this.state.phoneNumber}
               name="phone"
               required 

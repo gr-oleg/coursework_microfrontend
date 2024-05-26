@@ -37,6 +37,12 @@
     margin-bottom: 10px;
   }
 
+  .profile .item{  
+    padding: 2px; /* Add some padding inside the input fields */
+    border: 1px solid #ccc; /* Add a border around the input fields */
+    border-radius: 4px; /* Round the corners of the input fields */
+  }
+
   .profile .submit {
    color: #ffffff;
    background-color: #4bb13d;
