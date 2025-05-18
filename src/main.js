@@ -50,4 +50,10 @@ registerApplication(
   () => location.pathname.startsWith('/')
 )
 
+registerApplication(
+  'admin',
+  () => import('./admin/admin.app.js'),
+  () => location.pathname.startsWith('/admin')
+)
+
 start()

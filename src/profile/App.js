@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './profile.css'
 import avatar from '../../public/img/image.png';
 import { TbLogout } from "react-icons/tb";
+import { FaTrashAlt, FaCheck, FaShoppingCart, FaEye } from "react-icons/fa";
 
 export class App extends Component {
   constructor(props) {
@@ -9,24 +10,48 @@ export class App extends Component {
     this.state = {
       phoneNumber: "",
       email: localStorage.getItem('userEmail'),
-      id: localStorage.getItem('userId')
+      id: localStorage.getItem('userId'),
+      historyViewed: [],
+      historyOrders: [],
+      loadingViewed: true,
+      loadingOrders: true,
+      error: "",
     };
+  }
+
+  componentDidMount() {
+    this.fetchHistory();
+    this.fetchOrders();
+  }
+
+  fetchHistory = () => {
+    // Replace with your real API
+    fetch(`http://13.51.198.24/history/viewed/${this.state.id}`)
+      .then(res => res.json())
+      .then(data => this.setState({ historyViewed: data || [], loadingViewed: false }))
+      .catch(() => this.setState({ loadingViewed: false }));
+  }
+
+  fetchOrders = () => {
+    // Replace with your real API
+    fetch(`http://13.51.198.24/history/orders/${this.state.id}`)
+      .then(res => res.json())
+      .then(data => this.setState({ historyOrders: data || [], loadingOrders: false }))
+      .catch(() => this.setState({ loadingOrders: false }));
   }
 
   handleClick = (e) => {
     e.preventDefault();
     const login = { phoneNumber: this.state.phoneNumber };
     if (this.state.phoneNumber.trim() === "") {
-      alert("Please fill in phone number.");
+      this.setState({ error: "Заповніть номер телефону!" });
       return;
     } else {
-      console.log(login);
       fetch(`http://13.51.198.24/user/${this.state.email}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(login),
       })
-
         .then((response) => {
             if (response.ok) {
                 const contentType = response.headers.get("content-type");
@@ -46,10 +71,11 @@ export class App extends Component {
             } else {
                 alert(data);
             }
+            this.setState({ error: "" });
           }
         })
         .catch((error) => {
-            alert(error.message);
+            this.setState({ error: error.message });
             console.error("Error:", error);
         });
   }};
@@ -59,10 +85,8 @@ export class App extends Component {
     if (window.confirm("Are you sure you want to delete your account?")) {
       fetch(`http://13.51.198.24/user/${this.state.id}`, {
           method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(login),
+          headers: { "Content-Type": "application/json" }
       })
-
         .then((response) => {
             if (response.ok) {
                 const contentType = response.headers.get("content-type");
@@ -88,7 +112,7 @@ export class App extends Component {
           }
         })
         .catch((error) => {
-            alert(error.message);
+            this.setState({ error: error.message });
             console.error("Error:", error);
         });
   }};
@@ -99,29 +123,34 @@ export class App extends Component {
   }
 
   handlePhoneNumberChange = (e) => {
-    this.setState({ phoneNumber: e.target.value });
+    this.setState({ phoneNumber: e.target.value, error: "" });
   }
 
   render() {
+    const { historyViewed, historyOrders, loadingViewed, loadingOrders, error } = this.state;
     return (
-      <div className="profile">
-        <div className="avatar">
-          <div className="avatar-wrapper">
-            <img src={avatar}/>
-          </div>
+      <div className="profile-card">
+        <button className="profile-btn profile-btn-logout" onClick={this.clearLocalStorage} title="Вийти">
+          <TbLogout size={24} />
+        </button>
+        <div className="profile-avatar">
+          <img src={avatar} alt="Avatar"/>
         </div>
-        <div className="body">
-          <p>Name: {localStorage.getItem('userName')}</p>
-          <p>Email: {localStorage.getItem('userEmail')}</p>
-          <p>
-            Phone Number: &nbsp;
-            <input 
-              className="item"
-              type="tel" 
+        <div className="profile-info">
+          <h2>{localStorage.getItem('userName') || 'User'}</h2>
+          <div className="profile-field">
+            <span className="profile-label">Email:</span>
+            <span className="profile-value">{localStorage.getItem('userEmail')}</span>
+          </div>
+          <div className="profile-field">
+            <span className="profile-label">Телефон:</span>
+            <input
+              className="profile-input"
+              type="tel"
               placeholder={(localStorage.getItem('userPhoneNumber') === 'null' || localStorage.getItem('userPhoneNumber') === null) ? "+380" : localStorage.getItem('userPhoneNumber')}
               value={this.state.phoneNumber}
               name="phone"
-              required 
+              required
               onKeyPress={(event) => {
                 if (!/[0-9+]/.test(event.key)) {
                   event.preventDefault();
@@ -129,13 +158,61 @@ export class App extends Component {
               }}
               onChange={this.handlePhoneNumberChange}
             />
-            <button className="submit" onClick={this.handleClick}>&#10003;</button>
-          </p>
-          <button className='delete' onClick={this.deleteClick}>Delete account</button>
+            <button
+              className="profile-btn profile-btn-success"
+              title="Зберегти"
+              onClick={this.handleClick}>
+              <FaCheck />
+            </button>
+          </div>
+          {error && <div className="profile-error">{error}</div>}
+          <button className="profile-btn profile-btn-danger" onClick={this.deleteClick}>
+            <FaTrashAlt style={{marginRight: 6}} /> Видалити акаунт
+          </button>
         </div>
-        <div className="bodyexit">
-          <button className='exit' onClick={this.clearLocalStorage}>Exit<TbLogout /></button>
-        </div>
+
+        <section className="profile-history">
+          <h3><FaEye style={{marginRight: 5}}/>Історія переглядів</h3>
+          {loadingViewed ? (
+            <div className="profile-history-loading">Завантаження...</div>
+          ) : (
+            <ul>
+              {historyViewed.length === 0 ? (
+                <li className="profile-history-empty">Поки що немає переглядів.</li>
+              ) : (
+                historyViewed.map((item, idx) =>
+                  <li key={item.id || idx} className="profile-history-item">
+                    <img src={item.photo} alt="" className="history-thumb"/>
+                    <span className="history-title">{item.name}</span>
+                    <span className="history-date">{item.dateViewed ? (new Date(item.dateViewed)).toLocaleString() : ""}</span>
+                  </li>
+                )
+              )}
+            </ul>
+          )}
+        </section>
+
+        <section className="profile-history">
+          <h3><FaShoppingCart style={{marginRight: 5}}/>Історія покупок</h3>
+          {loadingOrders ? (
+            <div className="profile-history-loading">Завантаження...</div>
+          ) : (
+            <ul>
+              {historyOrders.length === 0 ? (
+                <li className="profile-history-empty">Поки що немає покупок.</li>
+              ) : (
+                historyOrders.map((order, idx) =>
+                  <li key={order.id || idx} className="profile-history-item">
+                    <img src={order.photo} alt="" className="history-thumb"/>
+                    <span className="history-title">{order.name}</span>
+                    <span className="history-date">{order.dateOrdered ? (new Date(order.dateOrdered)).toLocaleString() : ""}</span>
+                    <span className="history-price">{order.price} грн</span>
+                  </li>
+                )
+              )}
+            </ul>
+          )}
+        </section>
       </div>
     )
   }

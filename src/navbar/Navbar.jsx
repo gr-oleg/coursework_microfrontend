@@ -18,7 +18,9 @@ function Navbar() {
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isReloaded, setIsReloaded] = useState(false);
+    
 
+    
     useEffect(() => {
         const handleAddToCart = (event) => {
           const item = event.detail;
