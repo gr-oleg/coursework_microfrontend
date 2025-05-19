@@ -34,7 +34,7 @@ const Login = ({ onLogin }) => {
       return;
     }else{
     console.log(login);
-    fetch("http://13.51.198.24/user/add", {
+    fetch("http://56.228.27.209/user/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(login),
@@ -74,7 +74,7 @@ const loginClick = (e) => {
     alert("Please fill in all fields");
     return;
   }else{
-  const url = `http://13.51.198.24/user/${email}?pass=${pass}`;
+  const url = `http://56.228.27.209/user/${email}?pass=${pass}`;
   fetch(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },

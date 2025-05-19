@@ -21,24 +21,54 @@ export class App extends Component {
 
   componentDidMount() {
     this.fetchHistory();
-    this.fetchOrders();
+    this.fetchOrdersAndItems();
   }
 
   fetchHistory = () => {
-    // Replace with your real API
     fetch(`http://13.51.198.24/history/viewed/${this.state.id}`)
       .then(res => res.json())
       .then(data => this.setState({ historyViewed: data || [], loadingViewed: false }))
       .catch(() => this.setState({ loadingViewed: false }));
   }
 
-  fetchOrders = () => {
-    // Replace with your real API
-    fetch(`http://13.51.198.24/history/orders/${this.state.id}`)
-      .then(res => res.json())
-      .then(data => this.setState({ historyOrders: data || [], loadingOrders: false }))
-      .catch(() => this.setState({ loadingOrders: false }));
-  }
+  fetchOrdersAndItems = async () => {
+    this.setState({ loadingOrders: true });
+    try {
+      const ordersResp = await fetch("http://56.228.34.106/order/getAll");
+      const allOrders = await ordersResp.json();
+      const userId = localStorage.getItem('userId');
+      const userOrders = allOrders.filter(order => String(order.idUser) === String(userId));
+      const itemsResp = await fetch("http://16.171.137.58/item/getAll");
+      const allItems = await itemsResp.json();
+      const itemsMap = {};
+      allItems.forEach(item => { itemsMap[item.id] = item; });
+      const ordersWithItems = userOrders.map(order => {
+        let idItemsArr = [];
+        try {
+          idItemsArr = JSON.parse(order.idItems);
+        } catch (e) {
+          idItemsArr = order.idItems
+            .replace(/\[|\]/g, '')
+            .split(',')
+            .map(id => parseInt(id.trim()))
+            .filter(Boolean);
+        }
+        const items = idItemsArr.map(id => itemsMap[id]).filter(Boolean);
+        return {
+          ...order,
+          items,
+        };
+      });
+      this.setState({
+        historyOrders: ordersWithItems,
+        loadingOrders: false,
+        error: "",
+      });
+    } catch (error) {
+      this.setState({ loadingOrders: false, error: "Не вдалося завантажити історію покупок" });
+      console.error(error);
+    }
+  };
 
   handleClick = (e) => {
     e.preventDefault();
@@ -192,23 +222,37 @@ export class App extends Component {
           )}
         </section>
 
-        <section className="profile-history">
+        <section className="profile-history profile-history-orders">
           <h3><FaShoppingCart style={{marginRight: 5}}/>Історія покупок</h3>
           {loadingOrders ? (
             <div className="profile-history-loading">Завантаження...</div>
           ) : (
-            <ul>
+            <ul className="profile-history-orders-list">
               {historyOrders.length === 0 ? (
                 <li className="profile-history-empty">Поки що немає покупок.</li>
               ) : (
-                historyOrders.map((order, idx) =>
-                  <li key={order.id || idx} className="profile-history-item">
-                    <img src={order.photo} alt="" className="history-thumb"/>
-                    <span className="history-title">{order.name}</span>
-                    <span className="history-date">{order.dateOrdered ? (new Date(order.dateOrdered)).toLocaleString() : ""}</span>
-                    <span className="history-price">{order.price} грн</span>
+                historyOrders.map((order, idx) => (
+                  <li key={order.id || idx} className="profile-history-order">
+                    <div className="profile-order-header">
+                      <span className="profile-order-title">Замовлення №{order.id}</span>
+                      <span className="profile-order-total">{order.totalPrice}$</span>
+                    </div>
+                    <div className="profile-order-address">{order.address}</div>
+                    <ul className="profile-order-items-list">
+                      {order.items.length === 0 ? (
+                        <li>Товарів не знайдено</li>
+                      ) : (
+                        order.items.map(item => (
+                          <li key={item.id} className="profile-order-item">
+                            <img src={item.photo} alt="" className="profile-order-thumb"/>
+                            <span className="profile-order-name">{item.name}</span>
+                            {item.price && <span className="profile-order-price">{item.price}$</span>}
+                          </li>
+                        ))
+                      )}
+                    </ul>
                   </li>
-                )
+                ))
               )}
             </ul>
           )}

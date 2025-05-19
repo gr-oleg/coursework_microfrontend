@@ -257,3 +257,75 @@ html, body {
     color: var(--PrimaryColor);
     transform: scale(1.04);
 }
+
+/* Додаємо стиль для блоку брендів */
+.brands-section {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+.brand-logo {
+    max-width: 120px;
+    max-height: 38px;
+    object-fit: contain;
+    filter: grayscale(0.5);
+    opacity: 0.85;
+    transition: filter 0.2s, opacity 0.2s, transform 0.15s;
+}
+.brand-logo:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1.07);
+}
+.brands-title {
+    text-align: center;
+    color: var(--SecondaryColor);
+    font-weight: 600;
+    margin-bottom: 14px;
+    margin-top: 30px;
+    letter-spacing: 1px;
+}
+/* Відгуки */
+.reviews-section {
+    max-width: 460px;
+    margin: 55px auto 15px auto;
+    background: var(--whiteColor);
+    border-radius: 18px;
+    box-shadow: 0 2px 22px rgba(2,15,29,0.07);
+    padding: 25px 20px 22px 20px;
+}
+.reviews-section h3 {
+    text-align: center;
+    color: var(--PrimaryColor);
+    margin-bottom: 18px;
+    font-size: 1.15rem;
+    letter-spacing: 0.7px;
+}
+.review-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 130px;
+}
+.review-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 7px;
+    border: 2.5px solid var(--PrimaryColor);
+}
+.review-name {
+    font-weight: 500;
+    color: var(--textColor);
+}
+.review-text {
+    color: var(--greyText);
+    margin-top: 7px;
+    font-size: 15px;
+    text-align: center;
+    max-width: 340px;
+}

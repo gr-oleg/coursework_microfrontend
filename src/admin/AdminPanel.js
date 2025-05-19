@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-// Фіксовані адміністратор та API_URL
+// Адмін режим та адреса API
 const isAdmin = true;
-const API_URL = "http://51.21.3.167";
+const API_URL = "http://16.171.137.58"; // Заміни на https:// якщо є SSL!
 
-// Можливі опції для статі, категорії
 const GENDERS = [
   { value: "", label: "Стать" },
   { value: "men", label: "Men" },
@@ -24,15 +23,15 @@ function AdminPanel() {
   const [form, setForm] = useState({
     name: "",
     price: "",
-    description: "",
-    gender: "",
+    desc: "",
+    sex: "",
     category: "",
-    photo: "",
+    img: "",
   });
   const [error, setError] = useState("");
   const [preview, setPreview] = useState("");
 
-  // Оновлений endpoint для отримання списку товарів
+  // Отримати список товарів
   const fetchItems = () => {
     fetch(`${API_URL}/item/getAll`)
       .then(r => r.json())
@@ -53,18 +52,18 @@ function AdminPanel() {
     setForm({
       name: item.name || "",
       price: item.price || "",
-      description: item.description || "",
-      gender: item.gender || "",
+      desc: item.desc || "",
+      sex: item.sex || "",
       category: item.category || "",
-      photo: item.photo || "",
+      img: item.img || "",
     });
-    setPreview(item.photo || "");
+    setPreview(item.img || "");
     setError("");
   };
 
   const handleChange = e => {
     const { name, value, files } = e.target;
-    if (name === "photo" && files && files.length > 0) {
+    if (name === "img" && files && files.length > 0) {
       uploadPhoto(files[0]);
     } else {
       setForm({ ...form, [name]: value });
@@ -83,7 +82,7 @@ function AdminPanel() {
       });
       if (!res.ok) throw new Error("Не вдалося завантажити фото");
       const { url } = await res.json();
-      setForm(f => ({ ...f, photo: url }));
+      setForm(f => ({ ...f, img: url }));
       setPreview(url);
       setError("");
     } catch (e) {
@@ -93,7 +92,7 @@ function AdminPanel() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    for (const key of ["name", "price", "description", "gender", "category", "photo"]) {
+    for (const key of ["name", "price", "desc", "sex", "category", "img"]) {
       if (!form[key]) {
         setError("Всі поля мають бути заповнені!");
         return;
@@ -115,10 +114,10 @@ function AdminPanel() {
           setForm({
             name: "",
             price: "",
-            description: "",
-            gender: "",
+            desc: "",
+            sex: "",
             category: "",
-            photo: "",
+            img: "",
           });
           setPreview("");
           fetchItems();
@@ -133,10 +132,10 @@ function AdminPanel() {
           setForm({
             name: "",
             price: "",
-            description: "",
-            gender: "",
+            desc: "",
+            sex: "",
             category: "",
-            photo: "",
+            img: "",
           });
           setPreview("");
           fetchItems();
@@ -193,16 +192,16 @@ function AdminPanel() {
             style={{ flex: "1 1 80px", padding: 7, borderRadius: 6, border: "1px solid #d0d7de" }}
           />
           <input
-            name="description"
+            name="desc"
             placeholder="Опис"
-            value={form.description}
+            value={form.desc}
             onChange={handleChange}
             required
             style={{ flex: "2 1 200px", padding: 7, borderRadius: 6, border: "1px solid #d0d7de" }}
           />
           <select
-            name="gender"
-            value={form.gender}
+            name="sex"
+            value={form.sex}
             onChange={handleChange}
             required
             style={{ flex: "1 1 100px", padding: 7, borderRadius: 6, border: "1px solid #d0d7de" }}
@@ -223,7 +222,7 @@ function AdminPanel() {
             ))}
           </select>
           <input
-            name="photo"
+            name="img"
             type="file"
             accept="image/*"
             onChange={handleChange}
@@ -257,10 +256,10 @@ function AdminPanel() {
                 setForm({
                   name: "",
                   price: "",
-                  description: "",
-                  gender: "",
+                  desc: "",
+                  sex: "",
                   category: "",
-                  photo: "",
+                  img: "",
                 });
                 setPreview("");
                 setError("");
@@ -310,9 +309,9 @@ function AdminPanel() {
             {items.map(item => (
               <tr key={item.id} style={{ borderBottom: "1px solid #f0f0f0" }}>
                 <td style={{ padding: 8, textAlign: "center" }}>
-                  {item.photo && (
+                  {item.img && (
                     <img 
-                      src={item.photo} 
+                      src={item.img} 
                       alt="товар" 
                       width={48} 
                       height={48} 
@@ -322,8 +321,8 @@ function AdminPanel() {
                 </td>
                 <td style={{ padding: 8 }}>{item.name}</td>
                 <td style={{ padding: 8 }}>{item.price}</td>
-                <td style={{ padding: 8 }}>{item.description}</td>
-                <td style={{ padding: 8 }}>{item.gender}</td>
+                <td style={{ padding: 8 }}>{item.desc}</td>
+                <td style={{ padding: 8 }}>{item.sex}</td>
                 <td style={{ padding: 8 }}>{item.category}</td>
                 <td style={{ padding: 8 }}>
                   <button

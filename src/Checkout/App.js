@@ -50,7 +50,7 @@ class App extends Component {
       return;
     }else{
     console.log(check);
-    fetch("http://13.49.159.68/order/add", {
+    fetch("http://56.228.34.106/order/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(check),

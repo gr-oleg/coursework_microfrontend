@@ -18,7 +18,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://51.21.3.167/item/getAll')
+    fetch('http://16.171.137.58/item/getAll')
       .then(response => response.json())
       .then(data => {
         const womenItems = data.filter(item => item.sex === 'women');
