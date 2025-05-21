@@ -229,11 +229,28 @@ function AdminPanel() {
             required={!editingItem}
             style={{ flex: "1 1 160px" }}
           />
-          {preview && (
-            <div style={{ margin: "10px 0", flexBasis: "100%", textAlign: "center" }}>
-              <img src={preview} alt="Фото товару" width={100} style={{ borderRadius: 8, border: "1px solid #eee" }} />
-            </div>
-          )}
+{preview && (
+  <div style={{ margin: "10px 0", flexBasis: "100%", textAlign: "center" }}>
+    <img
+      src={
+        preview.startsWith("http")
+          ? preview
+          : (() => {
+              try {
+                // Якщо локальний файл — require
+                return require(`../../public/img/${preview}`).default;
+              } catch {
+                // fallback: просто підстав
+                return `/img/${preview}`;
+              }
+            })()
+      }
+      alt="Фото товару"
+      width={100}
+      style={{ borderRadius: 8, border: "1px solid #eee" }}
+    />
+  </div>
+)}
           <button
             type="submit"
             style={{
@@ -306,55 +323,71 @@ function AdminPanel() {
             </tr>
           </thead>
           <tbody>
-            {items.map(item => (
-              <tr key={item.id} style={{ borderBottom: "1px solid #f0f0f0" }}>
-                <td style={{ padding: 8, textAlign: "center" }}>
-                  {item.img && (
-                    <img 
-                      src={item.img} 
-                      alt="товар" 
-                      width={48} 
-                      height={48} 
-                      style={{ objectFit: "cover", borderRadius: 6, border: "1px solid #e0e0e0" }} 
-                    />
-                  )}
-                </td>
-                <td style={{ padding: 8 }}>{item.name}</td>
-                <td style={{ padding: 8 }}>{item.price}</td>
-                <td style={{ padding: 8 }}>{item.desc}</td>
-                <td style={{ padding: 8 }}>{item.sex}</td>
-                <td style={{ padding: 8 }}>{item.category}</td>
-                <td style={{ padding: 8 }}>
-                  <button
-                    onClick={() => handleEdit(item)}
-                    style={{
-                      background: "#fff",
-                      border: "1px solid #d0d7de",
-                      color: "#0969da",
-                      borderRadius: 6,
-                      padding: "4px 12px",
-                      marginRight: 6,
-                      cursor: "pointer",
-                    }}
-                  >
-                    Редагувати
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    style={{
-                      background: "#fff",
-                      border: "1px solid #f44336",
-                      color: "#f44336",
-                      borderRadius: 6,
-                      padding: "4px 12px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Видалити
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {items.map(item => {
+              let imgSrc = "";
+              if (item.img) {
+                // Якщо img — це абсолютний шлях чи url, використовуй напряму
+                if (item.img.startsWith("http") || item.img.startsWith("/")) {
+                  imgSrc = item.img;
+                } else {
+                  // Якщо img — тільки назва файлу, пробуй як локальний ресурс через require
+                  try {
+                    imgSrc = require("../../public/img/" + item.img).default;
+                  } catch {
+                    imgSrc = "";
+                  }
+                }
+              }
+              return (
+                <tr key={item.id} style={{ borderBottom: "1px solid #f0f0f0" }}>
+                  <td style={{ padding: 8, textAlign: "center" }}>
+                    {imgSrc && (
+                      <img 
+                        src={imgSrc} 
+                        alt="товар" 
+                        width={48} 
+                        height={48} 
+                        style={{ objectFit: "cover", borderRadius: 6, border: "1px solid #e0e0e0" }} 
+                      />
+                    )}
+                  </td>
+                  <td style={{ padding: 8 }}>{item.name}</td>
+                  <td style={{ padding: 8 }}>{item.price}</td>
+                  <td style={{ padding: 8 }}>{item.desc}</td>
+                  <td style={{ padding: 8 }}>{item.sex}</td>
+                  <td style={{ padding: 8 }}>{item.category}</td>
+                  <td style={{ padding: 8 }}>
+                    <button
+                      onClick={() => handleEdit(item)}
+                      style={{
+                        background: "#fff",
+                        border: "1px solid #d0d7de",
+                        color: "#0969da",
+                        borderRadius: 6,
+                        padding: "4px 12px",
+                        marginRight: 6,
+                        cursor: "pointer",
+                      }}
+                    >
+                      Редагувати
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      style={{
+                        background: "#fff",
+                        border: "1px solid #f44336",
+                        color: "#f44336",
+                        borderRadius: 6,
+                        padding: "4px 12px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Видалити
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

@@ -45,15 +45,21 @@ registerApplication(
 )
 
 registerApplication(
-  'footer',
-  () => import('./footer/footer.app.js'),
-  () => location.pathname.startsWith('/')
-)
-
-registerApplication(
   'admin',
   () => import('./admin/admin.app.js'),
   () => location.pathname.startsWith('/admin')
 )
+
+registerApplication(
+  'product',
+  () => import('./product/product.app.js'),
+  () => /^\/product\/[^/]+$/.test(location.pathname)
+)
+
+registerApplication(
+  'footer',
+  () => import('./footer/footer.app.js'),
+  () => location.pathname.startsWith('/')
+);
 
 start()

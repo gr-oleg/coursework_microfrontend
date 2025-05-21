@@ -27,3 +27,120 @@ footer {
   box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
   z-index: 1000;
 }
+
+.footer {
+    background: linear-gradient(90deg, #0f2027, #2c5364 90%);
+    color: #fff;
+    padding: 32px 0 16px 0;
+    font-size: 1rem;
+    box-shadow: 0 -2px 16px rgba(44,83,100,0.2);
+}
+
+.footerContainer {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 0 24px;
+}
+
+.footer-left h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.45rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.footer-left h3 span {
+    color: #27e2e2;
+    font-size: 1rem;
+    margin-left: 8px;
+}
+
+.footer-desc {
+    margin: 0;
+    color: #cce6ff;
+    font-size: 1rem;
+}
+
+.footer-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 12px; /* відступ між пунктами */
+}
+
+.footer-links li {
+    margin: 8px 0;
+}
+
+.footer-links a {
+    color: #eee;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #27e2e2;
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.footer-social img {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0) invert(1);
+    transition: filter 0.2s;
+}
+
+.footer-social a:hover img {
+    filter: brightness(1) invert(0.5) sepia(1) hue-rotate(140deg) saturate(3);
+}
+
+.footer-contact {
+    font-size: 1rem;
+    color: #cce6ff;
+    text-align: right;
+}
+
+.footer-contact a {
+    color: #27e2e2;
+    text-decoration: none;
+}
+
+.footer-contact a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .footerContainer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+        text-align: center;
+    }
+    .footer-right {
+        align-items: center;
+    }
+}

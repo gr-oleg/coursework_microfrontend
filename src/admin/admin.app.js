@@ -7,6 +7,7 @@ const lifecycles = singleSpaReact({
   React,
   ReactDOM,
   rootComponent: AdminPanel,
+  domElementGetter: () => document.getElementById('admin'),
   errorBoundary(err, info, props) {
     return <div>Помилка в адмін-панелі: {err.message}</div>;
   },
