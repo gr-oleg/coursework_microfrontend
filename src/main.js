@@ -11,6 +11,12 @@ registerApplication(
 )
 
 registerApplication(
+  'chat',
+  () => import('./chat/chat.app.js'),
+  () => location.pathname.startsWith('/')
+)
+
+registerApplication(
   'men',
   () => import('./goods/men/men.app.js'),
   () => location.pathname.startsWith('/men')
