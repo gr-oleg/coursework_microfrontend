@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './profile.css'
-import avatar from '../../public/img/image.png';
+import avatar from '../img/image.png';
 import { TbLogout } from "react-icons/tb";
 import { FaTrashAlt, FaCheck, FaShoppingCart, FaEye } from "react-icons/fa";
 

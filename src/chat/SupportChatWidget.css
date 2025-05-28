@@ -9,7 +9,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #1976d2;
+  background: linear-gradient(to right, hsl(187, 85%, 43%), hsl(199, 100%, 33%));
   border: none;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   display: flex;
@@ -17,13 +17,12 @@
   justify-content: center;
   cursor: pointer;
 }
-
 .support-chat-box {
   position: fixed;
   bottom: 100px;
   right: 24px;
-  width: 350px;
-  max-height: 500px;
+  width: 520px;        
+  max-height: 650px;   
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.18);

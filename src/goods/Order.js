@@ -3,7 +3,7 @@ import { FaTrash } from 'react-icons/fa';
 
 export class Order extends Component {
   render() {
-    const imgSrc = require("../../public/img/" + this.props.item.img);
+    const imgSrc = require("../img/" + this.props.item.img);
     return (
       <div className='item'>
         <img src={imgSrc.default} />

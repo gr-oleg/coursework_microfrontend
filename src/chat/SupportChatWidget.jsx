@@ -8,11 +8,13 @@ function SupportChatWidget() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+
+  // ref на сам контейнер з повідомленнями
+  const messagesContainerRef = useRef(null);
 
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
   }, [messages, open]);
 
@@ -65,7 +67,7 @@ function SupportChatWidget() {
               ×
             </button>
           </div>
-          <div className="support-chat-messages">
+          <div className="support-chat-messages" ref={messagesContainerRef}>
             {messages.map((msg, i) => (
               <div
                 key={i}
@@ -79,7 +81,6 @@ function SupportChatWidget() {
                 {msg.content}
               </div>
             ))}
-            <div ref={messagesEndRef} />
           </div>
           <form
             className="support-chat-input"

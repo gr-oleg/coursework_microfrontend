@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 // Адмін режим та адреса API
 const isAdmin = true;
-const API_URL = "http://16.171.137.58"; // Заміни на https:// якщо є SSL!
+const API_URL = "http://16.171.137.58"; 
 
 const GENDERS = [
   { value: "", label: "Стать" },
@@ -238,7 +238,7 @@ function AdminPanel() {
           : (() => {
               try {
                 // Якщо локальний файл — require
-                return require(`../../public/img/${preview}`).default;
+                return require(`../img/${preview}`).default;
               } catch {
                 // fallback: просто підстав
                 return `/img/${preview}`;
@@ -332,7 +332,7 @@ function AdminPanel() {
                 } else {
                   // Якщо img — тільки назва файлу, пробуй як локальний ресурс через require
                   try {
-                    imgSrc = require("../../public/img/" + item.img).default;
+                    imgSrc = require("../img/" + item.img).default;
                   } catch {
                     imgSrc = "";
                   }

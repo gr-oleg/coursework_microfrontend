@@ -9,7 +9,7 @@ export class Item extends Component {
   }
 
   render() {
-    const imgSrc = require("../../public/img/" + this.props.item.img);
+    const imgSrc = require("../img/" + this.props.item.img);
     return (
       <div className='items'>
         <Link to={`/product/${this.props.item.id}`} className="item-link" style={{ textDecoration: 'none', color: 'inherit' }}>

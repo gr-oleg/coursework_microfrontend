@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import '../app.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Bigboard1 from '../../public/img/bigboard1.webp';
-import Bigboard2 from '../../public/img/bigboard2.webp';
-import Bigboard3 from '../../public/img/bigboard3.webp';
+import Bigboard1 from '../img/bigboard1.webp';
+import Bigboard2 from '../img/bigboard2.webp';
+import Bigboard3 from '../img/bigboard3.webp';
+import Recommendations from './Recommendations.jsx';
 
 // Приклади відгуків
 const reviews = [
@@ -47,26 +48,6 @@ const brands = [
   }
 ];
 
-// Додаємо акційний банер
-const PromoBanner = () => (
-  <div style={{
-    margin: "38px auto 0 auto",
-    width: "95%",
-    maxWidth: 700,
-    background: "var(--gradientColor)",
-    color: "var(--whiteColor)",
-    borderRadius: 18,
-    boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-    textAlign: "center",
-    padding: "1.1rem 0.5rem",
-    fontWeight: 500,
-    fontSize: "1.18rem",
-    letterSpacing: "1.1px"
-  }}>
-    <span role="img" aria-label="fire" style={{marginRight: 8}}>🔥</span>
-    Весняна акція! Знижка <span style={{color: "#ffb347", fontWeight:700}}>20%</span> на другу пару взуття!
-  </div>
-);
 
 const App = () => {
   const settings = {
@@ -147,8 +128,8 @@ const App = () => {
         </Link>
       </div>
 
-      {/* Акційний банер */}
-      <PromoBanner />
+      {/* Рекомендовані товари */}
+      <Recommendations />
 
       {/* Відгуки */}
       <div

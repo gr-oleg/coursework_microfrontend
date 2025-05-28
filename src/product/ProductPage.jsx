@@ -54,7 +54,7 @@ const handleAdd = (e) => {
 
   let imgSrc;
   try {
-    imgSrc = require("../../public/img/" + item.img).default;
+    imgSrc = require("../img/" + item.img).default;
   } catch {
     imgSrc = "";
   }
