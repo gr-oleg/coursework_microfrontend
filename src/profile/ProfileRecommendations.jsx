@@ -1,48 +1,46 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-const Recommendations = () => {
+// Динамічний require для картинок з src/img/
+const getImgSrc = (item) => {
+  try {
+    if (item.img && (item.img.startsWith("http") || item.img.startsWith("/"))) {
+      return item.img;
+    }
+    const req = require(`../img/${item.img}`);
+    return req && req.default ? req.default : req;
+  } catch {
+    try {
+      const req = require(`../img/no-image.png`);
+      return req && req.default ? req.default : req;
+    } catch {
+      return "";
+    }
+  }
+};
+
+const ProfileRecommendations = ({ userId, n = 15 }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch("http://13.61.35.121:8001/train", {
-      method: "POST",
+    if (!userId) return;
+    setLoading(true);
+    fetch(`http://13.61.35.121:8001/recommend/content/${userId}?n=${n}`, {
       headers: { accept: "application/json" },
     })
-      .then(() =>
-        fetch("http://13.61.35.121:8001/recommend/popular?n=15", {
-          headers: { accept: "application/json" },
-        })
-      )
       .then((res) => res.json())
       .then((data) => {
-        setItems(data.popular_items || []);
+        setItems(data.content_based_items || []);
         setLoading(false);
       })
       .catch(() => {
         setItems([]);
         setLoading(false);
       });
-  }, []);
+  }, [userId, n]);
 
-  // Використання require для картинок з src/img/
-  const getImgSrc = (item) => {
-    try {
-      if (item.img && (item.img.startsWith("http") || item.img.startsWith("/"))) {
-        return item.img;
-      }
-      return require(`../img/${item.img}`);
-    } catch {
-      try {
-        return require(`../img/no-image.png`);
-      } catch {
-        return "";
-      }
-    }
-  };
-
-  // Функція для навігації на сторінку товару
+  // Функція для переходу на сторінку товару
   const goToProduct = (id) => {
     window.history.pushState({}, "", `/product/${id}`);
     window.dispatchEvent(new PopStateEvent("popstate"));
@@ -62,7 +60,7 @@ const Recommendations = () => {
     }
   };
 
-  // Визначаємо чи показувати стрілку вліво/вправо (щоб не показувати коли скролити нема куди)
+  // Визначаємо чи показувати стрілку вліво/вправо
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
@@ -82,11 +80,13 @@ const Recommendations = () => {
     };
   }, [items.length, loading]);
 
+  if (!userId) return null;
+
   return (
     <div
       style={{
-        maxWidth: 1250,
-        margin: "0px auto 0 auto",
+        maxWidth: 800,
+        margin: "32px auto 0 auto",
         background: "var(--whiteColor)",
         borderRadius: 16,
         boxShadow: "0 2px 22px rgba(2,15,29,0.09)",
@@ -99,10 +99,10 @@ const Recommendations = () => {
           textAlign: "center",
           color: "var(--PrimaryColor)",
           marginBottom: 18,
-          fontSize: 23,
+          fontSize: 21,
         }}
       >
-        Рекомендовано для вас
+        Персональні рекомендації
       </h3>
       {loading ? (
         <div style={{ textAlign: "center", color: "var(--greyText)" }}>
@@ -157,7 +157,7 @@ const Recommendations = () => {
               scrollBehavior: "smooth",
               scrollbarColor: "#ccc #f7f8fa",
               scrollbarWidth: "thin",
-              margin: "0 44px", // місце для стрілок
+              margin: "0 44px",
             }}
           >
             {items.map((item) => {
@@ -223,7 +223,8 @@ const Recommendations = () => {
                       marginBottom: 6,
                       textAlign: "center",
                     }}
-                  ></div>
+                  >
+                  </div>
                   <div
                     style={{
                       fontSize: 13,
@@ -286,4 +287,4 @@ const Recommendations = () => {
   );
 };
 
-export default Recommendations;
+export default ProfileRecommendations;

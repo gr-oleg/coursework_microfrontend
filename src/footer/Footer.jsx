@@ -20,17 +20,17 @@ export default function Footer() {
                     </ul>
                 </div>
                 <div className="footer-right">
-                    <div className="footer-social">
-                        <a href="https://t.me/" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-                            <img src="/img/telegram.svg" alt="Telegram" />
-                        </a>
-                        <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                            <img src="/img/instagram.svg" alt="Instagram" />
-                        </a>
-                        <a href="mailto:support@example.com" aria-label="Email">
-                            <img src="/img/mail.svg" alt="Mail" />
-                        </a>
-                    </div>
+<div className="footer-social">
+    <a href="https://t.me/" target="_blank" rel="noopener noreferrer" aria-label="Telegram" style={{color: "#fff", textDecoration: "none"}}>
+        Telegram
+    </a>
+    <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{color: "#fff", textDecoration: "none"}}>
+        Instagram
+    </a>
+    <a href="mailto:support@example.com" aria-label="Email" style={{color: "#fff", textDecoration: "none"}}>
+        Email
+    </a>
+</div>
                     <p className="footer-contact">
                         <a href="mailto:support@example.com">support@example.com</a><br />
                         <span>+38 (099) 123-45-67</span>

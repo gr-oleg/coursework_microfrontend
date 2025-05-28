@@ -7,44 +7,26 @@ import 'slick-carousel/slick/slick-theme.css';
 import Bigboard1 from '../img/bigboard1.webp';
 import Bigboard2 from '../img/bigboard2.webp';
 import Bigboard3 from '../img/bigboard3.webp';
+import puma from '../img/puma.png';
+import adidas from '../img/adidas.png';
+import nike from '../img/nike.png'; 
+import new_balance from '../img/new_balance.png';
 import Recommendations from './Recommendations.jsx';
 
-// Приклади відгуків
-const reviews = [
-  {
-    name: "Олена",
-    text: "Дуже зручне взуття, швидка доставка! Рекомендую всім!",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-  },
-  {
-    name: "Іван",
-    text: "Кросівки якісні, обслуговування на висоті.",
-    avatar: "https://randomuser.me/api/portraits/men/10.jpg"
-  },
-  {
-    name: "Марія",
-    text: "Великий вибір і приємні ціни. Буду замовляти ще!",
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg"
-  }
-];
 
 // Приклади брендів
 const brands = [
   {
-    name: "Nike",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+    logo: nike
   },
   {
-    name: "Adidas",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"
+    logo: adidas
   },
   {
-    name: "Puma",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Puma_AG.svg"
+    logo: puma
   },
   {
-    name: "New Balance",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/5e/New_Balance_logo.svg"
+    logo: new_balance
   }
 ];
 
@@ -131,61 +113,7 @@ const App = () => {
       {/* Рекомендовані товари */}
       <Recommendations />
 
-      {/* Відгуки */}
-      <div
-        style={{
-          maxWidth: 420,
-          margin: "48px auto 0 auto",
-          background: "var(--whiteColor)",
-          borderRadius: 16,
-          boxShadow: "0 2px 22px rgba(2,15,29,0.09)",
-          padding: 20
-        }}
-      >
-        <h3 style={{
-          textAlign: "center",
-          color: "var(--PrimaryColor)",
-          marginBottom: 14
-        }}>Відгуки покупців</h3>
-        <Slider {...reviewSettings}>
-          {reviews.map((r, i) => (
-            <div
-              key={i}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                minHeight: 140
-              }}
-            >
-              <img
-                src={r.avatar}
-                alt={r.name}
-                style={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  marginBottom: 8,
-                  border: "2.5px solid var(--PrimaryColor)"
-                }}
-              />
-              <div style={{
-                fontWeight: 500,
-                color: "var(--textColor)"
-              }}>{r.name}</div>
-              <div style={{
-                color: "var(--greyText)",
-                marginTop: 7,
-                fontSize: 15,
-                textAlign: "center",
-                maxWidth: 340
-              }}>"{r.text}"</div>
-            </div>
-          ))}
-        </Slider>
-      </div>
-
+      
       {/* Блок брендів */}
       <div style={{margin: "40px auto 60px auto", textAlign: "center"}}>
         <h4 style={{
@@ -205,8 +133,8 @@ const App = () => {
                 src={b.logo}
                 alt={b.name}
                 style={{
-                  maxWidth: 110,
-                  height: 38,
+                  maxWidth: 200,
+                  height: 70,
                   objectFit: "contain",
                   opacity: 0.88,
                   filter: "grayscale(0.5)",

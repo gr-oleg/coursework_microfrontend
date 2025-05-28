@@ -3,6 +3,26 @@ import './profile.css'
 import avatar from '../img/image.png';
 import { TbLogout } from "react-icons/tb";
 import { FaTrashAlt, FaCheck, FaShoppingCart, FaEye } from "react-icons/fa";
+import ProfileRecommendations from './ProfileRecommendations.jsx';
+
+// Функція для require фото (працює і для .img, і для .photo)
+const getImgSrc = (item) => {
+  const file = item.img || item.photo;
+  try {
+    if (file && (file.startsWith("http") || file.startsWith("/"))) {
+      return file;
+    }
+    const req = require(`../img/${file}`);
+    return req && req.default ? req.default : req;
+  } catch {
+    try {
+      const req = require(`../img/no-image.png`);
+      return req && req.default ? req.default : req;
+    } catch {
+      return "";
+    }
+  }
+};
 
 export class App extends Component {
   constructor(props) {
@@ -156,6 +176,12 @@ export class App extends Component {
     this.setState({ phoneNumber: e.target.value, error: "" });
   }
 
+  // Перехід на сторінку товару (SPA)
+  goToProduct = (id) => {
+    window.history.pushState({}, "", `/product/${id}`);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  }
+
   render() {
     const { historyViewed, historyOrders, loadingViewed, loadingOrders, error } = this.state;
     return (
@@ -201,26 +227,7 @@ export class App extends Component {
           </button>
         </div>
 
-        <section className="profile-history">
-          <h3><FaEye style={{marginRight: 5}}/>Історія переглядів</h3>
-          {loadingViewed ? (
-            <div className="profile-history-loading">Завантаження...</div>
-          ) : (
-            <ul>
-              {historyViewed.length === 0 ? (
-                <li className="profile-history-empty">Поки що немає переглядів.</li>
-              ) : (
-                historyViewed.map((item, idx) =>
-                  <li key={item.id || idx} className="profile-history-item">
-                    <img src={item.photo} alt="" className="history-thumb"/>
-                    <span className="history-title">{item.name}</span>
-                    <span className="history-date">{item.dateViewed ? (new Date(item.dateViewed)).toLocaleString() : ""}</span>
-                  </li>
-                )
-              )}
-            </ul>
-          )}
-        </section>
+        <ProfileRecommendations userId={this.state.id} n={5} />
 
         <section className="profile-history profile-history-orders">
           <h3><FaShoppingCart style={{marginRight: 5}}/>Історія покупок</h3>
@@ -242,13 +249,31 @@ export class App extends Component {
                       {order.items.length === 0 ? (
                         <li>Товарів не знайдено</li>
                       ) : (
-                        order.items.map(item => (
-                          <li key={item.id} className="profile-order-item">
-                            <img src={item.photo} alt="" className="profile-order-thumb"/>
-                            <span className="profile-order-name">{item.name}</span>
-                            {item.price && <span className="profile-order-price">{item.price}$</span>}
-                          </li>
-                        ))
+                        order.items.map(item => {
+                          let imgSrc = "";
+                          try {
+                            const req = getImgSrc(item);
+                            imgSrc = req && req.default ? req.default : req;
+                          } catch {
+                            imgSrc = "";
+                          }
+                          return (
+                            <li
+                              key={item.id}
+                              className="profile-order-item"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => this.goToProduct(item.id)}
+                              tabIndex={0}
+                              role="button"
+                              title={`Перейти на сторінку товару "${item.name}"`}
+                              onKeyPress={e => { if (e.key === 'Enter') this.goToProduct(item.id); }}
+                            >
+                              <img src={imgSrc} alt={item.name} className="profile-order-thumb"/>
+                              <span className="profile-order-name">{item.name}</span>
+                              {item.price && <span className="profile-order-price">{item.price}$</span>}
+                            </li>
+                          );
+                        })
                       )}
                     </ul>
                   </li>
@@ -257,6 +282,46 @@ export class App extends Component {
             </ul>
           )}
         </section>
+
+               <section className="profile-history">
+          <h3><FaEye style={{marginRight: 5}}/>Історія переглядів</h3>
+          {loadingViewed ? (
+            <div className="profile-history-loading">Завантаження...</div>
+          ) : (
+            <ul>
+              {historyViewed.length === 0 ? (
+                <li className="profile-history-empty">Поки що немає переглядів.</li>
+              ) : (
+                historyViewed.map((item, idx) => {
+                  let imgSrc = "";
+                  try {
+                    const req = getImgSrc(item);
+                    imgSrc = req && req.default ? req.default : req;
+                  } catch {
+                    imgSrc = "";
+                  }
+                  return (
+                    <li
+                      key={item.id || idx}
+                      className="profile-history-item"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => this.goToProduct(item.id)}
+                      tabIndex={0}
+                      role="button"
+                      title={`Перейти на сторінку товару "${item.name}"`}
+                      onKeyPress={e => { if (e.key === 'Enter') this.goToProduct(item.id); }}
+                    >
+                      <img src={imgSrc} alt={item.name} className="history-thumb"/>
+                      <span className="history-title">{item.name}</span>
+                      <span className="history-date">{item.dateViewed ? (new Date(item.dateViewed)).toLocaleString() : ""}</span>
+                    </li>
+                  );
+                })
+              )}
+            </ul>
+          )}
+        </section>
+        
       </div>
     )
   }
